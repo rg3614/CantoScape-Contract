@@ -11,7 +11,9 @@ contract CantoScape is ERC721, ERC721Burnable, Ownable {
 
     Counters.Counter private _tokenIdCounter;
 
-    constructor() ERC721("CantoScape", "CS") {}
+    constructor() ERC721("CantoScape", "CS") {
+        
+    }
 
     function _baseURI() internal pure override returns (string memory) {
         return "https://gateway.pinata.cloud/ipfs/QmWYa15tjS6QPbz518oWxQSr52tcVAtmSh4KNgFRwUeG3R/";
