@@ -8,25 +8,25 @@ import "@openzeppelin/contracts@4.8.2/token/ERC1155/extensions/ERC1155Supply.sol
 
 contract EtherScapeItems is ERC1155, Ownable, ERC1155Burnable, ERC1155Supply {
 
-    uint256 public constant BRONZE_PICKAXE = 0;
-    uint256 public constant IRON_PICKAXE = 1;
-    uint256 public constant RUNE_PICKAXE = 2;
+    uint256 public constant BRONZE_PICKAXE = 1;
+    uint256 public constant IRON_PICKAXE = 2;
+    uint256 public constant RUNE_PICKAXE = 3;
 
-    uint256 public constant FISHING_ROD = 3;
+    uint256 public constant FISHING_ROD = 4;
 
-    uint256 public constant BRONZE_LONGSWORD = 4;
-    uint256 public constant IRON_LONGSWORD = 5;
-    uint256 public constant RUNE_LONGSWORD = 6;
+    uint256 public constant BRONZE_LONGSWORD = 5;
+    uint256 public constant IRON_LONGSWORD = 6;
+    uint256 public constant RUNE_LONGSWORD = 7;
 
-    uint256 public constant BRONZE_ARMOR = 7;
-    uint256 public constant IRON_ARMOR = 8;
-    uint256 public constant RUNE_ARMOR = 9;
+    uint256 public constant BRONZE_ARMOR = 8;
+    uint256 public constant IRON_ARMOR = 9;
+    uint256 public constant RUNE_ARMOR = 10;
 
-    uint256 public constant SHRIMP = 10;
-    uint256 public constant LOBSTER = 11;
-    uint256 public constant SHARK = 12;
+    uint256 public constant SHRIMP = 11;
+    uint256 public constant LOBSTER = 12;
+    uint256 public constant SHARK = 13;
 
-    uint256 public constant GOLD = 13;
+    uint256 public constant GOLD = 14;
 
 
     constructor() ERC1155("ENTER HERE") {
