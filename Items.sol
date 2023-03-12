@@ -6,7 +6,7 @@ import "@openzeppelin/contracts@4.8.2/access/Ownable.sol";
 import "@openzeppelin/contracts@4.8.2/token/ERC1155/extensions/ERC1155Burnable.sol";
 import "@openzeppelin/contracts@4.8.2/token/ERC1155/extensions/ERC1155Supply.sol";
 
-contract EtherScapeItems is ERC1155, Ownable, ERC1155Burnable, ERC1155Supply {
+contract CantoScapeItems is ERC1155, Ownable, ERC1155Burnable, ERC1155Supply {
 
     uint256 public constant BRONZE_PICKAXE = 1;
     uint256 public constant IRON_PICKAXE = 2;
@@ -29,7 +29,7 @@ contract EtherScapeItems is ERC1155, Ownable, ERC1155Burnable, ERC1155Supply {
     uint256 public constant GOLD = 14;
 
 
-    constructor() ERC1155("ENTER HERE") {
+    constructor() ERC1155("ENTER URL HERE") {
         _mint(msg.sender, BRONZE_PICKAXE, 10**27, "");
         _mint(msg.sender, IRON_PICKAXE, 10**27, "");
         _mint(msg.sender, RUNE_PICKAXE, 10**27, "");

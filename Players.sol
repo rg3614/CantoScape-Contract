@@ -6,13 +6,18 @@ import "@openzeppelin/contracts@4.8.2/token/ERC721/extensions/ERC721Burnable.sol
 import "@openzeppelin/contracts@4.8.2/access/Ownable.sol";
 import "@openzeppelin/contracts@4.8.2/utils/Counters.sol";
 
+import "./Items.sol";
+
 contract Players is ERC721, ERC721Burnable, Ownable {
     using Counters for Counters.Counter;
-
     Counters.Counter private _tokenIdCounter;
+
+    CantoScapeItems public immutable items;
     
-    constructor() ERC721("CantoScapePlayers", "CSP") {
-        
+    constructor(
+        CantoScapeItems itemsContractAddress
+    ) ERC721("CantoScapePlayers", "CSP") {
+        items = itemsContractAddress;
     }
 
     struct Player {
@@ -56,27 +61,31 @@ contract Players is ERC721, ERC721Burnable, Ownable {
 
     function setXp(uint256 _playerId, string memory _skill, uint256 _xpGained) internal {
         Player storage player = players[_playerId];
-        if (keccak256(bytes(_skill)) == keccak256(bytes("Fishing"))) {
+        if (keccak256(bytes(_skill)) == keccak256(bytes("fishing"))) {
             player.currentFishingXp += _xpGained;
         }
     }
 
     function levelUp(uint256 _playerId, string memory _skill) internal {
         Player storage player = players[_playerId];
-        if (keccak256(bytes(_skill)) == keccak256(bytes("Fishing"))) {
+        if (keccak256(bytes(_skill)) == keccak256(bytes("fishing"))) {
             player.fishingLevel += 1;
-            player.currentFishingXp = 0;
+            player.currentFishingXp = currentFishingXp - fishingXpForLevel;
             player.fishingXpForLevel = uint256(player.fishingLevel) * 100;
         }
     }
 
-    function quest(uint256 _playerId, string memory _skill) public onlyOwnerOf(_playerId) {
+    function quest(uint256 _playerId, string memory _skill, string memory _type) public onlyOwnerOf(_playerId) {
         Player storage player = players[_playerId];
         if (player.currentFishingXp >= player.fishingXpForLevel) {
             levelUp(_playerId, _skill);
         }
-        if (keccak256(bytes(_skill)) == keccak256(bytes("Fishing"))) {
-            setXp(_playerId, _skill, 25);
+
+        if (keccak256(bytes(_skill)) == keccak256(bytes("fishing"))) {
+            if (keccak256(bytes(_skill)) == keccak256(bytes("shrimp"))) {
+                items.mint(msg.sender, 11, 1, "");
+                setXp(_playerId, _skill, 25);
+            }
         }
     }
 
