@@ -275,6 +275,40 @@
 				"type": "function"
 			},
 			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bytes",
+						"name": "",
+						"type": "bytes"
+					}
+				],
+				"name": "onERC721Received",
+				"outputs": [
+					{
+						"internalType": "bytes4",
+						"name": "",
+						"type": "bytes4"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
 				"inputs": [],
 				"name": "owner",
 				"outputs": [
@@ -310,18 +344,47 @@
 				"inputs": [
 					{
 						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "playerQuesting",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "isQuesting",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint256",
+						"name": "time",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "typeQuest",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
 						"name": "_playerId",
 						"type": "uint256"
 					},
 					{
-						"internalType": "string",
-						"name": "_skill",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "_type",
-						"type": "string"
+						"internalType": "uint256",
+						"name": "_questType",
+						"type": "uint256"
 					}
 				],
 				"name": "quest",
@@ -491,6 +554,19 @@
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_playerId",
+						"type": "uint256"
+					}
+				],
+				"name": "withdraw",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
 			}
 		],
 		"devdoc": {
@@ -524,6 +600,9 @@
 				},
 				"name()": {
 					"details": "See {IERC721Metadata-name}."
+				},
+				"onERC721Received(address,address,uint256,bytes)": {
+					"details": "See {IERC721Receiver-onERC721Received}. Always returns `IERC721Receiver.onERC721Received.selector`."
 				},
 				"owner()": {
 					"details": "Returns the address of the current owner."
@@ -679,6 +758,14 @@
 				"dweb:/ipfs/QmemujxSd7gX8A9M8UwmNbz4Ms3U9FG9QfudUgxwvTmPWf"
 			]
 		},
+		"@openzeppelin/contracts@4.8.2/token/ERC721/utils/ERC721Holder.sol": {
+			"keccak256": "0x0108bf6a6ebd5f96678bed33a35947537263f96766131ee91461fb6485805028",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://ae2d274bf3d56a6d49a9bbd0a4871c54997a82551eb3eb1c0c39dc98698ff8bf",
+				"dweb:/ipfs/QmTT7ty5DPGAmRnx94Xu3TUDYGSPDVLN2bppJAjjedrg1e"
+			]
+		},
 		"@openzeppelin/contracts@4.8.2/utils/Address.sol": {
 			"keccak256": "0xf96f969e24029d43d0df89e59d365f277021dac62b48e1c1e3ebe0acdd7f1ca1",
 			"license": "MIT",
@@ -744,11 +831,11 @@
 			]
 		},
 		"Players.sol": {
-			"keccak256": "0xfe8a5b81c15aa6cc8a18a520d83dbc71358395319b09845e1fae2187b5522fd9",
+			"keccak256": "0x0bcd8cce84453249e04707b55ce2fb3d375a71fc075d3ca6846b39d0f362d50f",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://67da56f21cd7ac8074e1913716d343ba0296f117eb0791e0fe13325d472e27d8",
-				"dweb:/ipfs/QmTHx9TyYTNrTE6DD8HZFjft2Cg35xLUcjut9CzoLECnG5"
+				"bzz-raw://5bac4060b1ae477872247388388d2b0df855f847b97022f23d153a0c3a0c3829",
+				"dweb:/ipfs/QmdHaN4rEhjzZRPGPMnzWW4TaRfRiUKS4LtNU4TfcTE8A1"
 			]
 		}
 	},
