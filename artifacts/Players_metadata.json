@@ -363,6 +363,11 @@
 						"internalType": "address",
 						"name": "_playerAddress",
 						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_questType",
+						"type": "uint256"
 					}
 				],
 				"name": "rewards",
@@ -802,11 +807,11 @@
 			]
 		},
 		"Players.sol": {
-			"keccak256": "0x81df73f0de3edb63d2a47c6187d7c8f19ff5610f4498a6292a7734184788e71e",
+			"keccak256": "0xb6db836ca2ec82280297cb465a4bc2f215fd77654ee0facb8810a182cab11eb6",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://c44ccfe05f75e1a1e15ab923e74026e1a7fbb5e31aaf99664ce31f447eb347c6",
-				"dweb:/ipfs/QmY4GNKw6n4dvskKBXvznSjGjRjEE86BLLVPYTqsqvcT9P"
+				"bzz-raw://fed65c2cf0c56874aedb559d3a02fddaeed973daffc258882798662c8ffbd2c4",
+				"dweb:/ipfs/QmcT8zziCnjMKnwC2botkjsapziiaQnZyjXmDW5D5ekN9j"
 			]
 		}
 	},

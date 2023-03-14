@@ -74,11 +74,11 @@ contract Players is ERC721, ERC721Burnable, Ownable, ERC721Holder {
         player.fishingXpForLevel = uint256(player.fishingLevel) * 100;
     }
 
-    function rewards(uint256 _playerId, uint256 _time, address _playerAddress) public {
+    function rewards(uint256 _playerId, uint256 _time, address _playerAddress, uint256 _questType) public {
         require (msg.sender == questContract, "403");
         Player storage player = players[_playerId];
         uint256 timeDifference = block.timestamp - _time;
-        items.mint(_playerAddress, 11, timeDifference, "");
+        items.mint(_playerAddress, _questType, timeDifference, "");
 
         player.currentFishingXp += timeDifference;
         if (player.currentFishingXp >= player.fishingXpForLevel) {

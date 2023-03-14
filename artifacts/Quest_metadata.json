@@ -64,9 +64,14 @@
 			{
 				"inputs": [
 					{
-						"internalType": "uint256[]",
-						"name": "_tokenIds",
-						"type": "uint256[]"
+						"internalType": "uint256",
+						"name": "_tokenId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint8",
+						"name": "_questType",
+						"type": "uint8"
 					}
 				],
 				"name": "quest",
@@ -101,7 +106,7 @@
 					},
 					{
 						"internalType": "uint256",
-						"name": "typeQuest",
+						"name": "questType",
 						"type": "uint256"
 					},
 					{
@@ -498,19 +503,19 @@
 			]
 		},
 		"Players.sol": {
-			"keccak256": "0x86bc061e8bd56f38982e05323bbd2f53cd5c7d96ce5fa481282277c05bb876a2",
+			"keccak256": "0xb6db836ca2ec82280297cb465a4bc2f215fd77654ee0facb8810a182cab11eb6",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://4f3e39f8db28e5792ed664d843fa931d6300048d02e48acdd940d0e3659f9b50",
-				"dweb:/ipfs/QmUJY8eHd18pMXCLFMztNsWFEG1pr1Au27Y9oD2aA7X4Nn"
+				"bzz-raw://fed65c2cf0c56874aedb559d3a02fddaeed973daffc258882798662c8ffbd2c4",
+				"dweb:/ipfs/QmcT8zziCnjMKnwC2botkjsapziiaQnZyjXmDW5D5ekN9j"
 			]
 		},
 		"Quest.sol": {
-			"keccak256": "0x72e9e762f9698b5c38b480e87ab56a361e6928d431effa225fc45d2f2f792207",
+			"keccak256": "0xf11ac2091e47d9530398dd3a0882c3e20ed2c7df55c48745f6abdd7baaba430c",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://e647c943baae2dab161a08b001bfae45becb3d554ba73f73c12d8851826659b3",
-				"dweb:/ipfs/QmfUc626oBBVhmJ3ei43UF5GDYNqLNc1Gukosbgty2Cq4x"
+				"bzz-raw://960fdb362f9eb05aff050e9dac1b665d279fe380491540f9ac83dff46a55f228",
+				"dweb:/ipfs/QmSPgMnJk4EjS5MpxLc5i4JZUDLcC22MBXkCR6pqmtCvbi"
 			]
 		}
 	},

@@ -29,7 +29,7 @@ contract Quest is Ownable, ReentrancyGuard {
         uint256 id;
         bool isQuesting;
         uint256 time;
-        uint256 typeQuest;
+        uint256 questType;
         address owner;
     }
 
@@ -45,20 +45,28 @@ contract Quest is Ownable, ReentrancyGuard {
 
     constructor(Players _nftCollection) {
         nftCollection = _nftCollection;
-
     }
 
-    function quest(uint256[] calldata _tokenIds) external  {
-        uint256 len = _tokenIds.length;
-        for (uint256 i; i < len; ++i) {
-            require(nftCollection.ownerOf(_tokenIds[i]) == msg.sender, "Can't stake tokens you don't own!");
-            PlayerQuesting storage playerQuest = questingPlayers[_tokenIds[i]];
-            playerQuest.id = _tokenIds[i];
-            playerQuest.isQuesting = true;
-            playerQuest.time = block.timestamp;
-            playerQuest.owner = msg.sender;
+    function quest(uint256 _tokenId, uint8 _questType) external  {
+        require(nftCollection.ownerOf(_tokenId) == msg.sender, "Can't stake tokens you don't own!");
+        checkLevel(_tokenId, _questType);
+        PlayerQuesting storage playerQuest = questingPlayers[_tokenId];
+        playerQuest.id = _tokenId;
+        playerQuest.isQuesting = true;
+        playerQuest.time = block.timestamp;
+        playerQuest.owner = msg.sender;
+        playerQuest.questType = _questType;
+        nftCollection.transferFrom(msg.sender, address(this), _tokenId);
+    }
 
-            nftCollection.transferFrom(msg.sender, address(this), _tokenIds[i]);
+    function checkLevel(uint256 _tokenId, uint8 _questType) internal view {
+        if (_questType == 12) {
+            uint256 fishingLevel = nftCollection.getFishingLevel(_tokenId);
+            require (fishingLevel > 20);
+        }
+        if (_questType == 13) {
+            uint256 fishingLevel = nftCollection.getFishingLevel(_tokenId);
+            require (fishingLevel > 40);
         }
     }
 
@@ -68,7 +76,7 @@ contract Quest is Ownable, ReentrancyGuard {
             PlayerQuesting storage playerQuest = questingPlayers[_tokenIds[i]];
             require(questingPlayers[_tokenIds[i]].owner == msg.sender);
 
-            nftCollection.rewards(_tokenIds[i],playerQuest.time, playerQuest.owner);
+            nftCollection.rewards(_tokenIds[i],playerQuest.time, playerQuest.owner, playerQuest.questType);
 
             playerQuest.isQuesting = false;
 
