@@ -1,0 +1,137 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.9;
+
+import "Players.sol";
+import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
+
+
+contract Quest is Ownable, ReentrancyGuard {
+    Players public immutable nftCollection;
+
+    uint256 constant SECONDS_IN_HOUR = 3600;
+
+    struct Staker {
+        /**
+         * @dev The array of Token Ids staked by the user.
+         */
+        uint256[] stakedTokenIds;
+        /**
+         * @dev The time of the last update of the rewards.
+         */
+        uint256 timeOfLastUpdate;
+        /**
+         * @dev The amount of ERC20 Reward Tokens that have not been claimed by the user.
+         */
+        uint256 unclaimedRewards;
+    }
+
+    struct PlayerQuesting {
+        uint256 id;
+        bool isQuesting;
+        uint256 time;
+        uint256 typeQuest;
+        address owner;
+    }
+
+    mapping(address => Staker) public stakers;
+    mapping(uint256 => PlayerQuesting) public questingPlayers;
+
+    mapping(uint256 => address) public stakerAddress;
+    address[] public stakersArray;
+    mapping(address => uint256) public stakerToArrayIndex;
+    mapping(uint256 => uint256) public tokenIdToArrayIndex;
+
+    uint256 private rewardsPerHour = 100000;
+
+    constructor(Players _nftCollection) {
+        nftCollection = _nftCollection;
+
+    }
+
+    function quest(uint256[] calldata _tokenIds) external  {
+        uint256 len = _tokenIds.length;
+        for (uint256 i; i < len; ++i) {
+            require(nftCollection.ownerOf(_tokenIds[i]) == msg.sender, "Can't stake tokens you don't own!");
+            PlayerQuesting storage playerQuest = questingPlayers[_tokenIds[i]];
+            playerQuest.id = _tokenIds[i];
+            playerQuest.isQuesting = true;
+            playerQuest.time = block.timestamp;
+            playerQuest.owner = msg.sender;
+
+            nftCollection.transferFrom(msg.sender, address(this), _tokenIds[i]);
+        }
+    }
+
+    function withdraw(uint256[] calldata _tokenIds) external nonReentrant {
+        uint256 lenToWithdraw = _tokenIds.length;
+        for (uint256 i; i < lenToWithdraw; ++i) {
+            PlayerQuesting storage playerQuest = questingPlayers[_tokenIds[i]];
+            require(questingPlayers[_tokenIds[i]].owner == msg.sender);
+
+            nftCollection.rewards(_tokenIds[i],playerQuest.time, playerQuest.owner);
+
+            playerQuest.isQuesting = false;
+
+            nftCollection.transferFrom(address(this), msg.sender, _tokenIds[i]);
+        }
+    }
+
+    // function claimRewards() external {
+    //     Staker storage staker = stakers[msg.sender];
+
+    //     uint256 rewards = calculateRewards(msg.sender) + staker.unclaimedRewards;
+    //     require(rewards > 0, "You have no rewards to claim");
+
+    //     staker.timeOfLastUpdate = block.timestamp;
+    //     staker.unclaimedRewards = 0;
+
+    //    // rewardsToken.safeTransfer(msg.sender, rewards);
+    // }
+
+    function setRewardsPerHour(uint256 _newValue) public onlyOwner {
+        address[] memory _stakers = stakersArray;
+
+        uint256 len = _stakers.length;
+        for (uint256 i; i < len; ++i) {
+            updateRewards(_stakers[i]);
+        }
+
+        rewardsPerHour = _newValue;
+    }
+
+    function userStakeInfo(address _user)
+        public
+        view
+        returns (uint256[] memory _stakedTokenIds, uint256 _availableRewards)
+    {
+        return (stakers[_user].stakedTokenIds, availableRewards(_user));
+    }
+
+
+    function availableRewards(address _user) internal view returns (uint256 _rewards) {
+        Staker memory staker = stakers[_user];
+
+        if (staker.stakedTokenIds.length == 0) {
+            return staker.unclaimedRewards;
+        }
+
+        _rewards = staker.unclaimedRewards + calculateRewards(_user);
+    }
+
+    function calculateRewards(address _staker) internal view returns (uint256 _rewards) {
+        Staker memory staker = stakers[_staker];
+        return (
+            ((((block.timestamp - staker.timeOfLastUpdate) * staker.stakedTokenIds.length)) * rewardsPerHour)
+                / SECONDS_IN_HOUR
+        );
+    }
+
+    function updateRewards(address _staker) internal {
+        Staker storage staker = stakers[_staker];
+
+        staker.unclaimedRewards += calculateRewards(_staker);
+        staker.timeOfLastUpdate = block.timestamp;
+    }
+
+
+}

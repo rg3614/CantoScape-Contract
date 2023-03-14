@@ -341,37 +341,10 @@
 				"type": "function"
 			},
 			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"name": "playerQuesting",
-				"outputs": [
-					{
-						"internalType": "bool",
-						"name": "isQuesting",
-						"type": "bool"
-					},
-					{
-						"internalType": "uint256",
-						"name": "time",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "typeQuest",
-						"type": "uint256"
-					},
-					{
-						"internalType": "address",
-						"name": "owner",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
+				"inputs": [],
+				"name": "renounceOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -383,18 +356,16 @@
 					},
 					{
 						"internalType": "uint256",
-						"name": "_questType",
+						"name": "_time",
 						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "_playerAddress",
+						"type": "address"
 					}
 				],
-				"name": "quest",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "renounceOwnership",
+				"name": "rewards",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -464,6 +435,19 @@
 					}
 				],
 				"name": "setApprovalForAll",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_questContract",
+						"type": "address"
+					}
+				],
+				"name": "setQuestContract",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -551,19 +535,6 @@
 					}
 				],
 				"name": "transferOwnership",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "_playerId",
-						"type": "uint256"
-					}
-				],
-				"name": "withdraw",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -831,11 +802,11 @@
 			]
 		},
 		"Players.sol": {
-			"keccak256": "0x0bcd8cce84453249e04707b55ce2fb3d375a71fc075d3ca6846b39d0f362d50f",
+			"keccak256": "0x81df73f0de3edb63d2a47c6187d7c8f19ff5610f4498a6292a7734184788e71e",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://5bac4060b1ae477872247388388d2b0df855f847b97022f23d153a0c3a0c3829",
-				"dweb:/ipfs/QmdHaN4rEhjzZRPGPMnzWW4TaRfRiUKS4LtNU4TfcTE8A1"
+				"bzz-raw://c44ccfe05f75e1a1e15ab923e74026e1a7fbb5e31aaf99664ce31f447eb347c6",
+				"dweb:/ipfs/QmY4GNKw6n4dvskKBXvznSjGjRjEE86BLLVPYTqsqvcT9P"
 			]
 		}
 	},
