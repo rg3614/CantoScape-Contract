@@ -88,11 +88,18 @@ contract Players is ERC721, ERC721Burnable, Ownable, ERC721Holder {
         rewardsMultipler = _rewardsMultipler;
     }
 
-    function levelUp(uint256 _playerId) internal {
-        Player storage player = players[_playerId];
-        player.fishingLevel += 1;
-        player.currentFishingXp = player.currentFishingXp - player.fishingXpForLevel;
-        player.fishingXpForLevel = uint256(player.fishingLevel) * 100;
+    function levelUp(uint256 _playerId, uint256 _questType) internal {
+        if (_questType == 11 || _questType == 12) {
+            Player storage player = players[_playerId];
+            player.fishingLevel += 1;
+            player.currentFishingXp = player.currentFishingXp - player.fishingXpForLevel;
+            player.fishingXpForLevel = uint256(player.fishingLevel) * 100;
+        } else if (_questType == 15 || _questType == 16 || _questType == 17) {
+            Player storage player = players[_playerId];
+            player.miningLevel += 1;
+            player.currentMiningXp = player.currentMiningXp - player.miningXpForLevel;
+            player.miningXpForLevel = uint256(player.miningLevel) * 100;
+        }
     }
 
     function getXpMultipler(uint256 _questType) internal pure returns(uint256 xpMultiper) {
@@ -115,14 +122,14 @@ contract Players is ERC721, ERC721Burnable, Ownable, ERC721Holder {
             player.currentFishingXp += timeDifference;
             if (player.currentFishingXp >= player.fishingXpForLevel) {
                 while(player.currentFishingXp >= player.fishingXpForLevel) {
-                    levelUp(_playerId);
+                    levelUp(_playerId, _questType);
                 }
             }
         } else if (_questType == 15 || _questType == 16 || _questType == 17) {
             player.currentMiningXp += timeDifference;
             if (player.currentMiningXp >= player.miningXpForLevel) {
                 while(player.currentMiningXp >= player.miningXpForLevel) {
-                    levelUp(_playerId);
+                    levelUp(_playerId, _questType);
                 }
             }
         }

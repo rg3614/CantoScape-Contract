@@ -84,7 +84,9 @@ contract CantoScapeItems is ERC1155, Ownable, ERC1155Burnable, ERC1155Supply {
     function craftItems(uint256 _itemId, uint256 _amount)  public {
         if (_itemId == BRONZE_FULL_HELM) {
             require(balanceOf(msg.sender, BRONZE_BAR) > 2 * _amount, "Missing Required materials");
-            safeTransferFrom(msg.sender, address(this), BRONZE_BAR, 2 * _amount, "");
+            // Burn here
+         //   safeTransferFrom(msg.sender, address(this), BRONZE_BAR, 2 * _amount, "");
+       //     burn(msg.sender, BRONZE_BAR, 2 * _amount);
             mint(msg.sender, BRONZE_FULL_HELM, _amount, "");
         }        
     }
@@ -92,8 +94,11 @@ contract CantoScapeItems is ERC1155, Ownable, ERC1155Burnable, ERC1155Supply {
     function smithOre(uint256 _itemId, uint256 _amount) public {
         if (_itemId == BRONZE_BAR) {
             require(balanceOf(msg.sender, TIN_ORE) > _amount && balanceOf(msg.sender, COPPER_ORE) > _amount, "Missing Required materials");
-            safeTransferFrom(msg.sender, address(this), TIN_ORE, _amount, "");
-            safeTransferFrom(msg.sender, address(this), COPPER_ORE, _amount, "");
+            // BURN
+         //   safeTransferFrom(msg.sender, address(this), TIN_ORE, _amount, "");
+      //      burn(msg.sender, TIN_ORE, _amount);
+       //     burn(msg.sender, COPPER_ORE, _amount);
+          //  safeTransferFrom(msg.sender, address(this), COPPER_ORE, _amount, "");
             mint(msg.sender, BRONZE_BAR, _amount, "");
         }
     }
