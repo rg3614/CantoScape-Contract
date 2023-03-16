@@ -62,11 +62,11 @@ contract Quest is Ownable, ReentrancyGuard {
     function checkLevel(uint256 _tokenId, uint8 _questType) internal view {
         if (_questType == 12) {
             uint256 fishingLevel = nftCollection.getFishingLevel(_tokenId);
-            require (fishingLevel > 20);
+            require (fishingLevel > 20, "Level too low");
         }
         if (_questType == 13) {
             uint256 fishingLevel = nftCollection.getFishingLevel(_tokenId);
-            require (fishingLevel > 40);
+            require (fishingLevel > 40, "Level too low");
         }
     }
 
@@ -83,18 +83,6 @@ contract Quest is Ownable, ReentrancyGuard {
             nftCollection.transferFrom(address(this), msg.sender, _tokenIds[i]);
         }
     }
-
-    // function claimRewards() external {
-    //     Staker storage staker = stakers[msg.sender];
-
-    //     uint256 rewards = calculateRewards(msg.sender) + staker.unclaimedRewards;
-    //     require(rewards > 0, "You have no rewards to claim");
-
-    //     staker.timeOfLastUpdate = block.timestamp;
-    //     staker.unclaimedRewards = 0;
-
-    //    // rewardsToken.safeTransfer(msg.sender, rewards);
-    // }
 
     function setRewardsPerHour(uint256 _newValue) public onlyOwner {
         address[] memory _stakers = stakersArray;

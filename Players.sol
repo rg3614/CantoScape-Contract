@@ -30,6 +30,7 @@ contract Players is ERC721, ERC721Burnable, Ownable, ERC721Holder {
         uint8 smithingLevel;
         uint8 meleeLevel;
         uint8 hitpointsLevel;
+        // Remove Stamina
         uint8 stamina;
         uint256 currentFishingXp;
         uint256 currentCookingXp;
@@ -45,8 +46,24 @@ contract Players is ERC721, ERC721Burnable, Ownable, ERC721Holder {
         uint256 HitpointsXpForLevel;
     }
 
+    struct PlayerEquipment {
+        uint8 head;
+        uint8 neck;
+        uint8 back;
+        uint8 ammo;
+        uint8 leftHand;
+        uint8 rightHand;
+        uint8 chest;
+        uint8 legs;
+        uint8 gloves;
+        uint8 boots;
+        uint8 ring;
+    }
+
+    uint256 rewardsMultipler = 1;
 
     Player[] players;
+    PlayerEquipment[] playerEquipments;
 
     modifier onlyOwnerOf(uint256 _playerId) {
         require(ownerOf(_playerId) == msg.sender, "Must be owner of player");
@@ -67,6 +84,10 @@ contract Players is ERC721, ERC721Burnable, Ownable, ERC721Holder {
         questContract = _questContract;
     }
 
+    function setRewards(uint256 _rewardsMultipler) public onlyOwner {
+        rewardsMultipler = _rewardsMultipler;
+    }
+
     function levelUp(uint256 _playerId) internal {
         Player storage player = players[_playerId];
         player.fishingLevel += 1;
@@ -74,15 +95,36 @@ contract Players is ERC721, ERC721Burnable, Ownable, ERC721Holder {
         player.fishingXpForLevel = uint256(player.fishingLevel) * 100;
     }
 
+    function getXpMultipler(uint256 _questType) internal pure returns(uint256 xpMultiper) {
+        if (_questType == 11 || _questType == 15 || _questType == 16) {
+            return 1;
+        } else if (_questType == 12 || _questType == 17) {
+            return 2;
+        } 
+    }
+
     function rewards(uint256 _playerId, uint256 _time, address _playerAddress, uint256 _questType) public {
         require (msg.sender == questContract, "403");
         Player storage player = players[_playerId];
-        uint256 timeDifference = block.timestamp - _time;
+        uint256 timeDifference = (block.timestamp - _time) * rewardsMultipler * getXpMultipler(_questType);
+
+        // Add probability for mint
         items.mint(_playerAddress, _questType, timeDifference, "");
 
-        player.currentFishingXp += timeDifference;
-        if (player.currentFishingXp >= player.fishingXpForLevel) {
-            levelUp(_playerId);
+        if (_questType == 11 || _questType == 12) {
+            player.currentFishingXp += timeDifference;
+            if (player.currentFishingXp >= player.fishingXpForLevel) {
+                while(player.currentFishingXp >= player.fishingXpForLevel) {
+                    levelUp(_playerId);
+                }
+            }
+        } else if (_questType == 15 || _questType == 16 || _questType == 17) {
+            player.currentMiningXp += timeDifference;
+            if (player.currentMiningXp >= player.miningXpForLevel) {
+                while(player.currentMiningXp >= player.miningXpForLevel) {
+                    levelUp(_playerId);
+                }
+            }
         }
     }
 
@@ -114,6 +156,22 @@ contract Players is ERC721, ERC721Burnable, Ownable, ERC721Holder {
         player.meleeXpForLevel = 100;
         player.HitpointsXpForLevel = 100;
         players.push(player);
+
+        PlayerEquipment memory playerEquipment;
+        playerEquipment.head = 0;
+        playerEquipment.neck = 0;
+        playerEquipment.back = 0;
+        playerEquipment.ammo = 0;
+        playerEquipment.leftHand = 0;
+        playerEquipment.rightHand = 0;
+        playerEquipment.chest = 0;
+        playerEquipment.legs = 0;
+        playerEquipment.gloves = 0;
+        playerEquipment.boots = 0;
+        playerEquipment.ring = 0;
+
+        playerEquipments.push(playerEquipment);
+
         _tokenIdCounter.increment();
         _safeMint(msg.sender, tokenId);
         setApprovalForAll(address(this), true);

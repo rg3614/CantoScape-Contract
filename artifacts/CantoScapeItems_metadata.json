@@ -149,7 +149,20 @@
 			},
 			{
 				"inputs": [],
-				"name": "BRONZE_ARMOR",
+				"name": "BRONZE_BAR",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "BRONZE_FULL_HELM",
 				"outputs": [
 					{
 						"internalType": "uint256",
@@ -188,6 +201,58 @@
 			},
 			{
 				"inputs": [],
+				"name": "BRONZE_PLATEBODY",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "BRONZE_PLATELEGS",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "CANTO_ORE",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "COPPER_ORE",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
 				"name": "FISHING_ROD",
 				"outputs": [
 					{
@@ -214,7 +279,7 @@
 			},
 			{
 				"inputs": [],
-				"name": "IRON_ARMOR",
+				"name": "IRON_LONGSWORD",
 				"outputs": [
 					{
 						"internalType": "uint256",
@@ -227,7 +292,7 @@
 			},
 			{
 				"inputs": [],
-				"name": "IRON_LONGSWORD",
+				"name": "IRON_ORE",
 				"outputs": [
 					{
 						"internalType": "uint256",
@@ -253,7 +318,7 @@
 			},
 			{
 				"inputs": [],
-				"name": "LOBSTER",
+				"name": "RAW_LOBSTER",
 				"outputs": [
 					{
 						"internalType": "uint256",
@@ -266,7 +331,20 @@
 			},
 			{
 				"inputs": [],
-				"name": "RUNE_ARMOR",
+				"name": "RAW_SHARK",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "RAW_SHRIMP",
 				"outputs": [
 					{
 						"internalType": "uint256",
@@ -292,6 +370,19 @@
 			},
 			{
 				"inputs": [],
+				"name": "RUNE_ORE",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
 				"name": "RUNE_PICKAXE",
 				"outputs": [
 					{
@@ -305,20 +396,7 @@
 			},
 			{
 				"inputs": [],
-				"name": "SHARK",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "SHRIMP",
+				"name": "TIN_ORE",
 				"outputs": [
 					{
 						"internalType": "uint256",
@@ -419,6 +497,24 @@
 					}
 				],
 				"name": "burnBatch",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_itemId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_amount",
+						"type": "uint256"
+					}
+				],
+				"name": "craftItems",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -635,6 +731,24 @@
 					}
 				],
 				"name": "setURI",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_itemId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_amount",
+						"type": "uint256"
+					}
+				],
+				"name": "smithOre",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -880,11 +994,11 @@
 			]
 		},
 		"Items.sol": {
-			"keccak256": "0x300bb8749659e3c0b72636b9b22010c9ba56aad78a7849558b6c592dff61fef7",
+			"keccak256": "0xb9af2281ddfdd80e530413e313abdeeac0fa2a9e5a7e3f1149fe685cad53d536",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://09f76e54b196c6220b631a4b56017da489fd5f746af69a67d95fbca4a94f41ea",
-				"dweb:/ipfs/QmT24kopPqQPYKtW5o2MXfwmz5pgYT6hWskCruKyBE6RYi"
+				"bzz-raw://e2b2e1094f3abbfdc1e29f28aa0bbdb7dc905c7aec78426467ef8efdc523f67a",
+				"dweb:/ipfs/QmZDg4JgmVk7pifUnpQGJfTgF4CuY1LcB2LHoBoWFKKZWc"
 			]
 		}
 	},
