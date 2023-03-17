@@ -4,7 +4,79 @@
 	},
 	"language": "Solidity",
 	"output": {
-		"abi": [],
+		"abi": [
+			{
+				"inputs": [],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"inputs": [],
+				"name": "GOBLIN",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "drops",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "monsters",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "lvl",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "xp",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
 		"devdoc": {
 			"kind": "dev",
 			"methods": {},
@@ -33,11 +105,11 @@
 	},
 	"sources": {
 		"Combat.sol": {
-			"keccak256": "0xf2375773639943e97f4e93fa2c26f4e61592f54480e20d1ba2efd855819a21f8",
+			"keccak256": "0x09ac0a4f4bc88c24270b81ba2a2d034e378df5894bbe42dc0d9c8369815d54d0",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://30d90aec1d8ba756d89e5e841f9899555a1f8dfbe579a67f99ffcfc70f829377",
-				"dweb:/ipfs/QmZ1ctV3Rwttekz78mwqtAM8kF2UppuN5vWi8txEPFzx9i"
+				"bzz-raw://63ec58cd614258539fb511a9ea80315374888d5162e5718bb9093dc5db4f6ae5",
+				"dweb:/ipfs/QmPm4kKfs7gTfRavFYn63JD2M5wtjjYPRBq2qE9swRZVxY"
 			]
 		}
 	},

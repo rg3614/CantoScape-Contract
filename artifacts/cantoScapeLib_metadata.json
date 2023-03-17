@@ -1,0 +1,45 @@
+{
+	"compiler": {
+		"version": "0.8.18+commit.87f61d96"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"CantoScapeLib.sol": "cantoScapeLib"
+		},
+		"evmVersion": "paris",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"CantoScapeLib.sol": {
+			"keccak256": "0xfdcfe2bcff808ef510fcbe793f5af5c50169f05add6c72b0d73bc3f2931f1c83",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://307b4d5493caa8d66becec787516532b9fcdcc33341674f95b4cf290b31e8096",
+				"dweb:/ipfs/QmZy7guKbQE9y34XmmWp579zUX1PNQUgXEqxAZtaefMxSD"
+			]
+		}
+	},
+	"version": 1
+}

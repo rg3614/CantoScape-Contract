@@ -3,52 +3,59 @@ pragma solidity ^0.8.9;
 
 import "Players.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
-
+import "./CantoScapeLib.sol";
 
 contract Quest is Ownable, ReentrancyGuard {
     Players public immutable nftCollection;
-
-    uint256 constant SECONDS_IN_HOUR = 3600;
-
-    struct Staker {
-        /**
-         * @dev The array of Token Ids staked by the user.
-         */
-        uint256[] stakedTokenIds;
-        /**
-         * @dev The time of the last update of the rewards.
-         */
-        uint256 timeOfLastUpdate;
-        /**
-         * @dev The amount of ERC20 Reward Tokens that have not been claimed by the user.
-         */
-        uint256 unclaimedRewards;
-    }
 
     struct PlayerQuesting {
         uint256 id;
         bool isQuesting;
         uint256 time;
         uint256 questType;
+        uint256 questDetail;
         address owner;
     }
 
-    mapping(address => Staker) public stakers;
+    struct QuestDetail {
+        string name;
+        uint256 lvl;
+        uint256 xp;
+    }
+
+    mapping(uint256 => uint256[]) public drops;
     mapping(uint256 => PlayerQuesting) public questingPlayers;
 
-    mapping(uint256 => address) public stakerAddress;
-    address[] public stakersArray;
-    mapping(address => uint256) public stakerToArrayIndex;
-    mapping(uint256 => uint256) public tokenIdToArrayIndex;
-
-    uint256 private rewardsPerHour = 100000;
+    mapping(uint256 => QuestDetail) public combatQuests;
+    mapping(uint256 => QuestDetail) public fishingQuests;
+    mapping(uint256 => QuestDetail) public miningQuests;
 
     constructor(Players _nftCollection) {
         nftCollection = _nftCollection;
+
+        miningQuests[COPPER] = QuestDetail("COPPER", 1, 5);
+        miningQuests[TIN] = QuestDetail("TIN", 1, 5);
+        miningQuests[IRON] = QuestDetail("IRON", 10, 20);
+        miningQuests[RUNE] = QuestDetail("RUNE", 40, 200);
+        miningQuests[CANTO] = QuestDetail("CANTO", 99, 400);
+
+        fishingQuests[SHRIMP] = QuestDetail("SHRIMP", 1, 5);
+        fishingQuests[LOBSTER] = QuestDetail("LOBSTER", 40, 200);
+        fishingQuests[SHARK] = QuestDetail("SHARK", 70, 400);
+
+        combatQuests[CHICKEN] = QuestDetail("CHICKEN", 1, 5);
+        combatQuests[GOBLIN] = QuestDetail("GOBLIN", 5, 25);
+        combatQuests[WARRIOR] = QuestDetail("WARRIOR", 10, 50);
+        combatQuests[BARBARIAN] = QuestDetail("BARBARIAN", 20, 75);
+        combatQuests[HILL_GIANT] = QuestDetail("HILL_GIANT", 30, 100);
+        combatQuests[MOSS_GIANT] = QuestDetail("MOSS_GIANT", 40, 125);
+        combatQuests[LESSER_DEMON] = QuestDetail("LESSER_DEMON", 50, 200);
+        combatQuests[GREATER_DEMON] = QuestDetail("GREATER_DEMON", 60, 400);
     }
 
-    function quest(uint256 _tokenId, uint8 _questType) external  {
+    function quest(uint256 _tokenId, uint256 _questType, uint256 _questDetail) external  {
         require(nftCollection.ownerOf(_tokenId) == msg.sender, "Can't stake tokens you don't own!");
+
         checkLevel(_tokenId, _questType);
         PlayerQuesting storage playerQuest = questingPlayers[_tokenId];
         playerQuest.id = _tokenId;
@@ -56,10 +63,11 @@ contract Quest is Ownable, ReentrancyGuard {
         playerQuest.time = block.timestamp;
         playerQuest.owner = msg.sender;
         playerQuest.questType = _questType;
+        playerQuest.questDetail = _questDetail;
         nftCollection.transferFrom(msg.sender, address(this), _tokenId);
     }
 
-    function checkLevel(uint256 _tokenId, uint8 _questType) internal view {
+    function checkLevel(uint256 _tokenId, uint256 _questType) internal view {
         if (_questType == 12) {
             uint256 fishingLevel = nftCollection.getFishingLevel(_tokenId);
             require (fishingLevel > 20, "Level too low");
@@ -76,6 +84,8 @@ contract Quest is Ownable, ReentrancyGuard {
             PlayerQuesting storage playerQuest = questingPlayers[_tokenIds[i]];
             require(questingPlayers[_tokenIds[i]].owner == msg.sender);
 
+
+            // Change to just sending XP and skill
             nftCollection.rewards(_tokenIds[i],playerQuest.time, playerQuest.owner, playerQuest.questType);
 
             playerQuest.isQuesting = false;
@@ -83,51 +93,5 @@ contract Quest is Ownable, ReentrancyGuard {
             nftCollection.transferFrom(address(this), msg.sender, _tokenIds[i]);
         }
     }
-
-    function setRewardsPerHour(uint256 _newValue) public onlyOwner {
-        address[] memory _stakers = stakersArray;
-
-        uint256 len = _stakers.length;
-        for (uint256 i; i < len; ++i) {
-            updateRewards(_stakers[i]);
-        }
-
-        rewardsPerHour = _newValue;
-    }
-
-    function userStakeInfo(address _user)
-        public
-        view
-        returns (uint256[] memory _stakedTokenIds, uint256 _availableRewards)
-    {
-        return (stakers[_user].stakedTokenIds, availableRewards(_user));
-    }
-
-
-    function availableRewards(address _user) internal view returns (uint256 _rewards) {
-        Staker memory staker = stakers[_user];
-
-        if (staker.stakedTokenIds.length == 0) {
-            return staker.unclaimedRewards;
-        }
-
-        _rewards = staker.unclaimedRewards + calculateRewards(_user);
-    }
-
-    function calculateRewards(address _staker) internal view returns (uint256 _rewards) {
-        Staker memory staker = stakers[_staker];
-        return (
-            ((((block.timestamp - staker.timeOfLastUpdate) * staker.stakedTokenIds.length)) * rewardsPerHour)
-                / SECONDS_IN_HOUR
-        );
-    }
-
-    function updateRewards(address _staker) internal {
-        Staker storage staker = stakers[_staker];
-
-        staker.unclaimedRewards += calculateRewards(_staker);
-        staker.timeOfLastUpdate = block.timestamp;
-    }
-
 
 }

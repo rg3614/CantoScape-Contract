@@ -252,6 +252,30 @@
 				"type": "function"
 			},
 			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "EquipmentBonuses",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "attackBonus",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "defenseBonus",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [],
 				"name": "FISHING_ROD",
 				"outputs": [
@@ -505,24 +529,6 @@
 				"inputs": [
 					{
 						"internalType": "uint256",
-						"name": "_itemId",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "_amount",
-						"type": "uint256"
-					}
-				],
-				"name": "craftItems",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
 						"name": "id",
 						"type": "uint256"
 					}
@@ -731,24 +737,6 @@
 					}
 				],
 				"name": "setURI",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "_itemId",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "_amount",
-						"type": "uint256"
-					}
-				],
-				"name": "smithOre",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -994,11 +982,11 @@
 			]
 		},
 		"Items.sol": {
-			"keccak256": "0x33006961fdb5656fb39f57caf73dd77d76363abbfcabdf994cbe6faf694f16c4",
+			"keccak256": "0xb8330ea65d669d84ff6480c5d7d8ce1b71c454cb516d2ccc51dc75e0a4cdb5f5",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://e2c2319a903df596112e5bf8ca0bda2b0116fc367ceb314e05bbae08caf44ebd",
-				"dweb:/ipfs/QmQAsr1ppWbDgjWYPezqGNTupBodHASApyamK2Z8x2sJSC"
+				"bzz-raw://a84d806a956cc5348fadd866bd0b9774ccea0f24efcf1f6888271c92a8677d08",
+				"dweb:/ipfs/QmY43Kh2L2t4VggDvMUZD2u8E2DEhFi1M8ZLmdx1FaxoQc"
 			]
 		}
 	},

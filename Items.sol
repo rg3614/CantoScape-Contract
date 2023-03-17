@@ -36,22 +36,16 @@ contract CantoScapeItems is ERC1155, Ownable, ERC1155Burnable, ERC1155Supply {
 
     uint256 public constant BRONZE_BAR = 20;
 
+    struct equipmentBonuses {
+        uint256 attackBonus;
+        uint256 defenseBonus;
+    }
+
+    mapping(uint256 => equipmentBonuses) public EquipmentBonuses;
 
     constructor() ERC1155("ENTER URL HERE") {
-        // _mint(msg.sender, BRONZE_PICKAXE, 10**27, "");
-        // _mint(msg.sender, IRON_PICKAXE, 10**27, "");
-        // _mint(msg.sender, RUNE_PICKAXE, 10**27, "");
-        // _mint(msg.sender, FISHING_ROD, 10**27, "");
-        // _mint(msg.sender, BRONZE_LONGSWORD, 10**27, "");
-        // _mint(msg.sender, IRON_LONGSWORD, 10**27, "");
-        // _mint(msg.sender, RUNE_LONGSWORD, 10**27, "");
-        // _mint(msg.sender, BRONZE_ARMOR, 10**27, "");
-        // _mint(msg.sender, IRON_ARMOR, 10**27, "");
-        // _mint(msg.sender, RUNE_ARMOR, 10**27, "");
-        // _mint(msg.sender, SHRIMP, 10**27, "");
-        // _mint(msg.sender, LOBSTER, 10**27, "");
-        // _mint(msg.sender, SHARK, 10**27, "");
-        // _mint(msg.sender, GOLD, 10**27, "");
+        EquipmentBonuses[0] = equipmentBonuses(0,0);
+        EquipmentBonuses[BRONZE_FULL_HELM] = equipmentBonuses(0,3);
     }
 
     function setURI(string memory newuri) public onlyOwner {
@@ -79,27 +73,5 @@ contract CantoScapeItems is ERC1155, Ownable, ERC1155Burnable, ERC1155Supply {
         override(ERC1155, ERC1155Supply)
     {
         super._beforeTokenTransfer(operator, from, to, ids, amounts, data);
-    }
-
-    function craftItems(uint256 _itemId, uint256 _amount)  public {
-        if (_itemId == BRONZE_FULL_HELM) {
-            require(balanceOf(msg.sender, BRONZE_BAR) > 2 * _amount, "Missing Required materials");
-            // Burn here
-         //   safeTransferFrom(msg.sender, address(this), BRONZE_BAR, 2 * _amount, "");
-       //     burn(msg.sender, BRONZE_BAR, 2 * _amount);
-            mint(msg.sender, BRONZE_FULL_HELM, _amount, "");
-        }        
-    }
-
-    function smithOre(uint256 _itemId, uint256 _amount) public {
-        if (_itemId == BRONZE_BAR) {
-            require(balanceOf(msg.sender, TIN_ORE) > _amount && balanceOf(msg.sender, COPPER_ORE) > _amount, "Missing Required materials");
-            // BURN
-         //   safeTransferFrom(msg.sender, address(this), TIN_ORE, _amount, "");
-      //      burn(msg.sender, TIN_ORE, _amount);
-       //     burn(msg.sender, COPPER_ORE, _amount);
-          //  safeTransferFrom(msg.sender, address(this), COPPER_ORE, _amount, "");
-            mint(msg.sender, BRONZE_BAR, _amount, "");
-        }
     }
 }
