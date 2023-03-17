@@ -20,10 +20,12 @@ contract Players is ERC721, ERC721Burnable, Ownable, ERC721Holder {
         CantoScapeItems itemsContractAddress
     ) ERC721("CantoScapePlayers", "CSP") {
         items = itemsContractAddress;
+        setXp();
     }
     
     address questContract;
 
+    // Remove Melee switch to Attack/Str/Def/HP = Combat Level
     struct Player {
         uint8 fishingLevel;
         uint8 cookingLevel;
@@ -37,13 +39,8 @@ contract Players is ERC721, ERC721Burnable, Ownable, ERC721Holder {
         uint256 currentSmithingXp;
         uint256 currentMeleeXp;
         uint256 currentHitpointsXp;
-        uint256 fishingXpForLevel;
-        uint256 cookingXpForLevel;
-        uint256 miningXpForLevel;
-        uint256 smithingXpForLevel;
-        uint256 meleeXpForLevel;
-        uint256 HitpointsXpForLevel;
     }
+
     // 11 len
     struct PlayerEquipment {
         uint256 head;
@@ -64,9 +61,21 @@ contract Players is ERC721, ERC721Burnable, Ownable, ERC721Holder {
     Player[] players;
     PlayerEquipment[] playerEquipments;
 
+    mapping(uint256 => uint256) public xpForLevel;
+
     modifier onlyOwnerOf(uint256 _playerId) {
         require(ownerOf(_playerId) == msg.sender, "Must be owner of player");
         _;
+    }
+
+    function setXp() internal {
+        uint256 i = 2;
+        uint256 xp = 100;
+        xpForLevel[1] = xp;
+        for (i; i < 100; ++i) {
+            xpForLevel[i] = xp + xp / 10;
+            xp = xp + xp / 10;
+        }
     }
 
     // Attack, Deffence
@@ -133,6 +142,7 @@ contract Players is ERC721, ERC721Burnable, Ownable, ERC721Holder {
 
         PlayerEquipment storage playerEquipment = playerEquipments[_playerId];
         // 1000 = Keep current equipment
+        // Require certain level for equipment
         if (head != 1000) {
             playerEquipment.head = head;
         }
@@ -177,6 +187,10 @@ contract Players is ERC721, ERC721Burnable, Ownable, ERC721Holder {
         Player storage player = players[_playerId];
         return player.fishingLevel;
     }
+    function getMiningLevel(uint256 _playerId) public view returns (uint256) {
+        Player storage player = players[_playerId];
+        return player.miningLevel;
+    }
 
     function setQuestContract(address _questContract) public onlyOwner {
         questContract = _questContract;
@@ -187,39 +201,35 @@ contract Players is ERC721, ERC721Burnable, Ownable, ERC721Holder {
     }
 
     function levelUp(uint256 _playerId, uint256 _questType) internal {
-        if (_questType == 11 || _questType == 12) {
+        if (_questType == FISHING) {
             Player storage player = players[_playerId];
+            player.currentFishingXp = player.currentFishingXp - xpForLevel[player.fishingLevel];
             player.fishingLevel += 1;
-            player.currentFishingXp = player.currentFishingXp - player.fishingXpForLevel;
-            player.fishingXpForLevel = uint256(player.fishingLevel) * 100;
-        } else if (_questType == 15 || _questType == 16 || _questType == 17) {
+        } else if (_questType == MINING) {
             Player storage player = players[_playerId];
+            player.currentMiningXp = player.currentMiningXp - xpForLevel[player.miningLevel];
             player.miningLevel += 1;
-            player.currentMiningXp = player.currentMiningXp - player.miningXpForLevel;
-            player.miningXpForLevel = uint256(player.miningLevel) * 100;
         }
     }
 
-    function rewards(uint256 _playerId, uint256 _time, address _playerAddress, uint256 _questType) public {
+    function rewards(uint256 _playerId, address _playerAddress, uint256 _questType, uint256 _xp, uint256 _itemId, uint256 _amount) public {
         require (msg.sender == questContract, "403");
-        Player storage player = players[_playerId];
-        uint256 timeDifference = (block.timestamp - _time) * rewardsMultipler;
 
-        if (_questType == 11 || _questType == 12) {
-            player.currentFishingXp += timeDifference;
-            // Add probability for mint
-            items.mint(_playerAddress, _questType, timeDifference, "");
-            if (player.currentFishingXp >= player.fishingXpForLevel) {
-                while(player.currentFishingXp >= player.fishingXpForLevel) {
+        Player storage player = players[_playerId];
+
+        if (_questType == FISHING) {
+            player.currentFishingXp += _xp * rewardsMultipler;
+            items.mint(_playerAddress, _itemId, _amount, "");
+            if (player.currentFishingXp >= xpForLevel[player.fishingLevel]) {
+                while(player.currentFishingXp >= xpForLevel[player.fishingLevel]) {
                     levelUp(_playerId, _questType);
                 }
             }
-        } else if (_questType == 15 || _questType == 16 || _questType == 17) {
-            player.currentMiningXp += timeDifference;
-            // Add probability for mint
-            items.mint(_playerAddress, _questType, timeDifference, "");
-            if (player.currentMiningXp >= player.miningXpForLevel) {
-                while(player.currentMiningXp >= player.miningXpForLevel) {
+        } else if (_questType == MINING) {
+            player.currentMiningXp += _xp * rewardsMultipler;
+            items.mint(_playerAddress, _itemId, _amount, "");
+            if (player.currentMiningXp >= xpForLevel[player.miningLevel]) {
+                while(player.currentMiningXp >= xpForLevel[player.miningLevel]) {
                     levelUp(_playerId, _questType);
                 }
             }
@@ -270,12 +280,6 @@ contract Players is ERC721, ERC721Burnable, Ownable, ERC721Holder {
         player.currentSmithingXp = 0;
         player.currentMeleeXp = 0;
         player.currentHitpointsXp = 0;
-        player.fishingXpForLevel = 100;
-        player.cookingXpForLevel = 100;
-        player.miningXpForLevel = 100;
-        player.smithingXpForLevel = 100;
-        player.meleeXpForLevel = 100;
-        player.HitpointsXpForLevel = 100;
         players.push(player);
 
         PlayerEquipment memory playerEquipment;

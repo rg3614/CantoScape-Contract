@@ -36,6 +36,117 @@
 				"type": "event"
 			},
 			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "combatQuests",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "lvl",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "xp",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "drops",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "fishingQuests",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "lvl",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "xp",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "miningQuests",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "lvl",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "xp",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [],
 				"name": "nftCollection",
 				"outputs": [
@@ -69,9 +180,14 @@
 						"type": "uint256"
 					},
 					{
-						"internalType": "uint8",
+						"internalType": "uint256",
 						"name": "_questType",
-						"type": "uint8"
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_questDetail",
+						"type": "uint256"
 					}
 				],
 				"name": "quest",
@@ -110,6 +226,11 @@
 						"type": "uint256"
 					},
 					{
+						"internalType": "uint256",
+						"name": "questDetail",
+						"type": "uint256"
+					},
+					{
 						"internalType": "address",
 						"name": "owner",
 						"type": "address"
@@ -128,119 +249,6 @@
 			{
 				"inputs": [
 					{
-						"internalType": "uint256",
-						"name": "_newValue",
-						"type": "uint256"
-					}
-				],
-				"name": "setRewardsPerHour",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"name": "stakerAddress",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"name": "stakerToArrayIndex",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"name": "stakers",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "timeOfLastUpdate",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "unclaimedRewards",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"name": "stakersArray",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"name": "tokenIdToArrayIndex",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
 						"internalType": "address",
 						"name": "newOwner",
 						"type": "address"
@@ -249,30 +257,6 @@
 				"name": "transferOwnership",
 				"outputs": [],
 				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "_user",
-						"type": "address"
-					}
-				],
-				"name": "userStakeInfo",
-				"outputs": [
-					{
-						"internalType": "uint256[]",
-						"name": "_stakedTokenIds",
-						"type": "uint256[]"
-					},
-					{
-						"internalType": "uint256",
-						"name": "_availableRewards",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -494,28 +478,36 @@
 				"dweb:/ipfs/Qmct36zWXv3j7LZB83uwbg7TXwnZSN1fqHNDZ93GG98bGz"
 			]
 		},
-		"Items.sol": {
-			"keccak256": "0x300bb8749659e3c0b72636b9b22010c9ba56aad78a7849558b6c592dff61fef7",
+		"CantoScapeLib.sol": {
+			"keccak256": "0x2fb14a7b4531bf9b6498440e0fd03b828ad181065a2e23dd62b8971ee6a47af0",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://09f76e54b196c6220b631a4b56017da489fd5f746af69a67d95fbca4a94f41ea",
-				"dweb:/ipfs/QmT24kopPqQPYKtW5o2MXfwmz5pgYT6hWskCruKyBE6RYi"
+				"bzz-raw://13627647e5d98e176227f04155cad53fa6a34e004560ffec98dd0817fa0b6427",
+				"dweb:/ipfs/QmYcmHqaow5j2KfLVfScRhkBtUdavtYTa8F5FUmMhz3TzT"
+			]
+		},
+		"Items.sol": {
+			"keccak256": "0xd321b91faeb31f418a4edb0ca07c7beba5fc39f13896955ed31c34fbca07cc58",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://76a46f86155ab39338fa496de698871806df391b65b155b3756440d010315825",
+				"dweb:/ipfs/QmbKzb5LpCgxG66H7HkP37RwN7HVTbt2o7fkQPNXY7S7nm"
 			]
 		},
 		"Players.sol": {
-			"keccak256": "0xb6db836ca2ec82280297cb465a4bc2f215fd77654ee0facb8810a182cab11eb6",
+			"keccak256": "0x91b10d3e06c571586016a466e3b216972efb655c504b4a6222033b5520b4b036",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://fed65c2cf0c56874aedb559d3a02fddaeed973daffc258882798662c8ffbd2c4",
-				"dweb:/ipfs/QmcT8zziCnjMKnwC2botkjsapziiaQnZyjXmDW5D5ekN9j"
+				"bzz-raw://1a3e4437c936a6e744bc5e0d62b660398750963d0c9cebcb687a0dcf788d271c",
+				"dweb:/ipfs/QmV96k7ZftxhL8BQVWVpt1zvzKsvdgJXurN9r21Ue9LpSb"
 			]
 		},
 		"Quest.sol": {
-			"keccak256": "0xf11ac2091e47d9530398dd3a0882c3e20ed2c7df55c48745f6abdd7baaba430c",
+			"keccak256": "0xcb22f3096abdbf297fdda318f51c701ed81be6196685a82ac35eccbc1a16a2c6",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://960fdb362f9eb05aff050e9dac1b665d279fe380491540f9ac83dff46a55f228",
-				"dweb:/ipfs/QmSPgMnJk4EjS5MpxLc5i4JZUDLcC22MBXkCR6pqmtCvbi"
+				"bzz-raw://5aab2decfbeae2b28bdf982461c077b7f86760b5cfb42b1e2993fae1140da7a3",
+				"dweb:/ipfs/QmUNdUtG3Q1PLkmXmFaR3Hi4YarcaxS98HAr3DA5LPbsxd"
 			]
 		}
 	},

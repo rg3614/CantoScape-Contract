@@ -161,8 +161,44 @@
 				"type": "function"
 			},
 			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_itemId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_amount",
+						"type": "uint256"
+					}
+				],
+				"name": "craftItems",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
 				"inputs": [],
 				"name": "createPlayer",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_playerId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "_items",
+						"type": "uint256[]"
+					}
+				],
+				"name": "equipItems",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -181,6 +217,25 @@
 						"internalType": "address",
 						"name": "",
 						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_playerId",
+						"type": "uint256"
+					}
+				],
+				"name": "getCombatBonus",
+				"outputs": [
+					{
+						"internalType": "uint256[2]",
+						"name": "bonuses",
+						"type": "uint256[2]"
 					}
 				],
 				"stateMutability": "view",
@@ -214,6 +269,25 @@
 					}
 				],
 				"name": "getFishingXp",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_playerId",
+						"type": "uint256"
+					}
+				],
+				"name": "getMiningLevel",
 				"outputs": [
 					{
 						"internalType": "uint256",
@@ -355,11 +429,6 @@
 						"type": "uint256"
 					},
 					{
-						"internalType": "uint256",
-						"name": "_time",
-						"type": "uint256"
-					},
-					{
 						"internalType": "address",
 						"name": "_playerAddress",
 						"type": "address"
@@ -367,6 +436,21 @@
 					{
 						"internalType": "uint256",
 						"name": "_questType",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_xp",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_itemId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_amount",
 						"type": "uint256"
 					}
 				],
@@ -460,6 +544,37 @@
 			{
 				"inputs": [
 					{
+						"internalType": "uint256",
+						"name": "_rewardsMultipler",
+						"type": "uint256"
+					}
+				],
+				"name": "setRewards",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_itemId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_amount",
+						"type": "uint256"
+					}
+				],
+				"name": "smithOre",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
 						"internalType": "bytes4",
 						"name": "interfaceId",
 						"type": "bytes4"
@@ -542,6 +657,25 @@
 				"name": "transferOwnership",
 				"outputs": [],
 				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "xpForLevel",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
 				"type": "function"
 			}
 		],
@@ -798,20 +932,28 @@
 				"dweb:/ipfs/Qmct36zWXv3j7LZB83uwbg7TXwnZSN1fqHNDZ93GG98bGz"
 			]
 		},
-		"Items.sol": {
-			"keccak256": "0x300bb8749659e3c0b72636b9b22010c9ba56aad78a7849558b6c592dff61fef7",
+		"CantoScapeLib.sol": {
+			"keccak256": "0x2fb14a7b4531bf9b6498440e0fd03b828ad181065a2e23dd62b8971ee6a47af0",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://09f76e54b196c6220b631a4b56017da489fd5f746af69a67d95fbca4a94f41ea",
-				"dweb:/ipfs/QmT24kopPqQPYKtW5o2MXfwmz5pgYT6hWskCruKyBE6RYi"
+				"bzz-raw://13627647e5d98e176227f04155cad53fa6a34e004560ffec98dd0817fa0b6427",
+				"dweb:/ipfs/QmYcmHqaow5j2KfLVfScRhkBtUdavtYTa8F5FUmMhz3TzT"
+			]
+		},
+		"Items.sol": {
+			"keccak256": "0xd321b91faeb31f418a4edb0ca07c7beba5fc39f13896955ed31c34fbca07cc58",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://76a46f86155ab39338fa496de698871806df391b65b155b3756440d010315825",
+				"dweb:/ipfs/QmbKzb5LpCgxG66H7HkP37RwN7HVTbt2o7fkQPNXY7S7nm"
 			]
 		},
 		"Players.sol": {
-			"keccak256": "0xb134319f1316e01913a5e016ac7431f93e386283d8fbf0a2fbd9f719a7e940cf",
+			"keccak256": "0x51451f5e925b5ba8348402d3ebb4b9e8aca11f4521bdd6bc87a1f5f8e7244a4c",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://5a6bdbb562da1ddf3381e003566f6c81e8f8094f250e6da0a232c932b82bbd6d",
-				"dweb:/ipfs/QmZqD16YZ3FT7hRsLLmQdLhzVoNvdLMmmY7eUsoLHzK4U7"
+				"bzz-raw://e11393647d0862febf5707ce856c4ffefa35c22042098624856f03d96dcfe717",
+				"dweb:/ipfs/QmdZfN5184ZLsc6hPnb1Zcp4Dj6WH2zvYfSVeJPeoExS9r"
 			]
 		}
 	},

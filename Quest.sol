@@ -56,7 +56,8 @@ contract Quest is Ownable, ReentrancyGuard {
     function quest(uint256 _tokenId, uint256 _questType, uint256 _questDetail) external  {
         require(nftCollection.ownerOf(_tokenId) == msg.sender, "Can't stake tokens you don't own!");
 
-        checkLevel(_tokenId, _questType);
+        checkLevel(_tokenId, _questType, _questDetail);
+
         PlayerQuesting storage playerQuest = questingPlayers[_tokenId];
         playerQuest.id = _tokenId;
         playerQuest.isQuesting = true;
@@ -64,17 +65,27 @@ contract Quest is Ownable, ReentrancyGuard {
         playerQuest.owner = msg.sender;
         playerQuest.questType = _questType;
         playerQuest.questDetail = _questDetail;
+
         nftCollection.transferFrom(msg.sender, address(this), _tokenId);
     }
 
-    function checkLevel(uint256 _tokenId, uint256 _questType) internal view {
-        if (_questType == 12) {
+    function checkLevel(uint256 _tokenId, uint256 _questType, uint256 _questDetail) internal view {
+        if (_questType == FISHING) {
+            uint256 lvl = fishingQuests[_questDetail].lvl;
             uint256 fishingLevel = nftCollection.getFishingLevel(_tokenId);
-            require (fishingLevel > 20, "Level too low");
+            require (fishingLevel > lvl, "Level too low");
         }
-        if (_questType == 13) {
+        if (_questType == MINING) {
+            // Make function for get mining level
+            uint256 lvl = miningQuests[_questDetail].lvl;
+            uint256 fishingLevel = nftCollection.getMiningLevel(_tokenId);
+            require (fishingLevel > lvl, "Level too low");
+        }
+        if (_questType == COMBAT) {
+            // Make getter
+            uint256 lvl = combatQuests[_questDetail].lvl;
             uint256 fishingLevel = nftCollection.getFishingLevel(_tokenId);
-            require (fishingLevel > 40, "Level too low");
+            require (fishingLevel > lvl, "Level too low");
         }
     }
 
@@ -82,16 +93,27 @@ contract Quest is Ownable, ReentrancyGuard {
         uint256 lenToWithdraw = _tokenIds.length;
         for (uint256 i; i < lenToWithdraw; ++i) {
             PlayerQuesting storage playerQuest = questingPlayers[_tokenIds[i]];
+            QuestDetail storage questDetail = fishingQuests[playerQuest.questDetail];
+
+            if (playerQuest.questType == MINING) {
+                questDetail = miningQuests[playerQuest.questDetail];
+            } else if (playerQuest.questType == COMBAT) {
+                questDetail = combatQuests[playerQuest.questDetail];
+            }
+
             require(questingPlayers[_tokenIds[i]].owner == msg.sender);
 
-
-            // Change to just sending XP and skill
-            nftCollection.rewards(_tokenIds[i],playerQuest.time, playerQuest.owner, playerQuest.questType);
+            // TODO
+            nftCollection.rewards(_tokenIds[i],playerQuest.time, playerQuest.owner, playerQuest.questType, questDetail.xp);
 
             playerQuest.isQuesting = false;
 
             nftCollection.transferFrom(address(this), msg.sender, _tokenIds[i]);
         }
+    }
+
+    function checkRewards() internal {
+
     }
 
 }
