@@ -15,11 +15,33 @@ contract CantoScapeItems is ERC1155, Ownable, ERC1155Burnable, ERC1155Supply {
         uint256 defenseBonus;
     }
 
+    struct craftingRecipes {
+        string name;
+        uint256 itemReq;
+        uint256 amount;
+    }
+
+    mapping(uint256 => craftingRecipes) public CraftingRecipes;
+
     mapping(uint256 => equipmentBonuses) public EquipmentBonuses;
 
     constructor() ERC1155("ENTER URL HERE") {
         EquipmentBonuses[0] = equipmentBonuses(0,0);
-        EquipmentBonuses[BRONZE_FULL_HELM] = equipmentBonuses(0,3);
+        EquipmentBonuses[BRONZE_FULL_HELM] = equipmentBonuses(0,2);
+        EquipmentBonuses[BRONZE_PLATEBODY] = equipmentBonuses(0,3);
+        EquipmentBonuses[BRONZE_PLATELEGS] = equipmentBonuses(0,4);
+        EquipmentBonuses[BRONZE_LONGSWORD] = equipmentBonuses(2,0);
+
+        // Amount maybe should be constants.
+        CraftingRecipes[BRONZE_FULL_HELM] = craftingRecipes("BRONZE FULL HELM", BRONZE_BAR, 2);
+        CraftingRecipes[BRONZE_PLATEBODY] = craftingRecipes("BRONZE PLATEBODY", BRONZE_BAR, 3);
+        CraftingRecipes[BRONZE_PLATELEGS] = craftingRecipes("BRONZE PLATELEGS", BRONZE_BAR, 4);
+        CraftingRecipes[BRONZE_LONGSWORD] = craftingRecipes("BRONZE LONGSWORD", BRONZE_BAR, 2);
+
+        CraftingRecipes[BRONZE_BAR] = craftingRecipes("BRONZE BAR", BRONZE_ORE , 2);
+        CraftingRecipes[IRON_BAR] = craftingRecipes("IRON BAR", IRON_ORE, 2);
+        CraftingRecipes[RUNE_BAR] = craftingRecipes("RUNE BAR", RUNE_ORE, 2);
+        CraftingRecipes[CANTO_BAR] = craftingRecipes("CANTO BAR", CANTO_ORE, 2);
     }
 
     function setURI(string memory newuri) public onlyOwner {

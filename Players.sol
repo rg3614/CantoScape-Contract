@@ -220,57 +220,59 @@ contract Players is ERC721, ERC721Burnable, Ownable, ERC721Holder {
             player.currentFishingXp += _xp;
             items.mint(_playerAddress, _itemId, _amount, "");
             if (player.currentFishingXp >= xpForLevel[player.fishingLevel]) {
-                while(player.currentFishingXp >= xpForLevel[player.fishingLevel]) {
-                    levelUp(_playerId, _questType);
+                bool keepLvling = true;
+                while(keepLvling) {
+                    if (player.fishingLevel > 98) {
+                        keepLvling = false;
+                    } else if (player.currentFishingXp >= xpForLevel[player.fishingLevel]) {
+                        levelUp(_playerId, _questType);
+                    } else {
+                        keepLvling = false;
+                    }
                 }
             }
         } else if (_questType == MINING) {
             player.currentMiningXp += _xp;
             items.mint(_playerAddress, _itemId, _amount, "");
             if (player.currentMiningXp >= xpForLevel[player.miningLevel]) {
-                while(player.currentMiningXp >= xpForLevel[player.miningLevel]) {
-                    levelUp(_playerId, SMITHING);
+                bool keepLvling = true;
+                while(keepLvling) {
+                    if (player.miningLevel > 98) {
+                        keepLvling = false;
+                    } else if (player.currentMiningXp >= xpForLevel[player.miningLevel]) {
+                        levelUp(_playerId, _questType);
+                    } else {
+                        keepLvling = false;
+                    }
                 }
             }
         }
     }
 
-    // TODO: Smithing XP
-    function craftItems(uint256 _playerId, uint256 _itemId, uint256 _amount, uint256 xp) public {
+    function craft(uint256 _playerId, uint256 _itemId, uint256 _amount, uint256 xp, address _sender) public {
         require (msg.sender == questContract, "403");
+        // XP added after second require
         Player storage player = players[_playerId];
         player.currentSmithingXp += xp;
         if (player.currentSmithingXp >= xpForLevel[player.smithingLevel]) {
-            while(player.currentSmithingXp >= xpForLevel[player.smithingLevel]) {
-                levelUp(_playerId, SMITHING);
+            bool keepLvling = true;
+            while(keepLvling) {
+                if (player.smithingLevel > 98) {
+                    keepLvling = false;
+                } else if (player.currentSmithingXp >= xpForLevel[player.smithingLevel]) {
+                    levelUp(_playerId, SMITHING);
+                } else {
+                    keepLvling = false;
+                }
             }
         }
-        if (_itemId == BRONZE_FULL_HELM) {
-            require(items.balanceOf(msg.sender, BRONZE_BAR) >= 2 * _amount, "Missing Required materials");
+        uint256 itemReq;
+        uint256 amount;
 
-            items.burn(msg.sender, BRONZE_BAR, 2 * _amount);
-            items.mint(msg.sender, BRONZE_FULL_HELM, _amount, "");
-        }        
-    }
-
-    // TODO: Smithing XP
-    function smithOre(uint256 _playerId, uint256 _itemId, uint256 _amount, uint256 xp) public {
-        require (msg.sender == questContract, "403");
-        Player storage player = players[_playerId];
-        player.currentMiningXp += xp;
-        if (player.currentSmithingXp >= xpForLevel[player.smithingLevel]) {
-            while(player.currentSmithingXp >= xpForLevel[player.smithingLevel]) {
-                levelUp(_playerId, SMITHING);
-            }
-        }
-        // Probably should be a datatype instead of if statements
-        if (_itemId == BRONZE_BAR) {
-            require(items.balanceOf(msg.sender, TIN_ORE) > _amount && items.balanceOf(msg.sender, COPPER_ORE) > _amount, "Missing Required materials");
-            // BURN
-            items.burn(msg.sender, TIN_ORE, _amount);
-            items.burn(msg.sender, COPPER_ORE, _amount);
-            items.mint(msg.sender, BRONZE_BAR, _amount, "");
-        }
+        (, itemReq, amount) = items.CraftingRecipes(_itemId);
+        require(items.balanceOf(_sender, itemReq) > amount * _amount, "Missing Required materials");
+        items.burn(_sender, itemReq, amount * _amount);
+        items.mint(_sender, _itemId, amount * _amount, "");
     }
 
     function _baseURI() internal pure override returns (string memory) {

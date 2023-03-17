@@ -155,6 +155,35 @@
 						"type": "uint256"
 					}
 				],
+				"name": "CraftingRecipes",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "itemReq",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
 				"name": "EquipmentBonuses",
 				"outputs": [
 					{
@@ -722,19 +751,19 @@
 			]
 		},
 		"CantoScapeLib.sol": {
-			"keccak256": "0x2868f81f87cb0038570a6ee33a0a64e5f47b6939f98dc567c18c692bdf9715e6",
+			"keccak256": "0x7df535066be08174d2b8eb48e22418144b3255455046334a2c33fd7fc92605ef",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://2b22fb28f42ec6f22566f2c3330df100321e44451b8060d73f58071e0be3a52a",
-				"dweb:/ipfs/QmaocwCXuMwkrn5crKzmCqCGx6F8nAroxHUx8rHRZUSUXo"
+				"bzz-raw://a15b73fb2bec3e04a590aba86924712715d76de011655c2b1b0d5dac8e8a1701",
+				"dweb:/ipfs/QmcxkQAjVJe8pQ7mofMvtPduSczANAJ5yLbHin1oMc2Aqs"
 			]
 		},
 		"Items.sol": {
-			"keccak256": "0xd321b91faeb31f418a4edb0ca07c7beba5fc39f13896955ed31c34fbca07cc58",
+			"keccak256": "0xb52d482399e9dd981cd445538549d10f66f9b55b992ec23b45b28a739e72b828",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://76a46f86155ab39338fa496de698871806df391b65b155b3756440d010315825",
-				"dweb:/ipfs/QmbKzb5LpCgxG66H7HkP37RwN7HVTbt2o7fkQPNXY7S7nm"
+				"bzz-raw://9a32e72d3291d01f29e61e1ee1ef0e67d36017c5f17098bed54751c7dfe3e9b2",
+				"dweb:/ipfs/QmVXGFSYnB9QtvLB8ao2e3yz2SSYUJG1JYpaJznNFTWRoj"
 			]
 		}
 	},

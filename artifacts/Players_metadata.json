@@ -311,6 +311,25 @@
 			{
 				"inputs": [
 					{
+						"internalType": "uint256",
+						"name": "_playerId",
+						"type": "uint256"
+					}
+				],
+				"name": "getSmithingLevel",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
 						"internalType": "address",
 						"name": "owner",
 						"type": "address"
@@ -940,11 +959,11 @@
 			]
 		},
 		"CantoScapeLib.sol": {
-			"keccak256": "0x5ba0e6fca13f1402a985c5b543c2e8a4f093ff05da5c13585ae9e34db8e225d8",
+			"keccak256": "0x2868f81f87cb0038570a6ee33a0a64e5f47b6939f98dc567c18c692bdf9715e6",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://cd473d9d18fbe5a3d0983064c1f00314d036c0320cbd4555fec05de549cd6826",
-				"dweb:/ipfs/QmNe2eCwQ6uH9ZWXaGPdM2Enuk6Nhq1jmH1nwT45TRZst3"
+				"bzz-raw://2b22fb28f42ec6f22566f2c3330df100321e44451b8060d73f58071e0be3a52a",
+				"dweb:/ipfs/QmaocwCXuMwkrn5crKzmCqCGx6F8nAroxHUx8rHRZUSUXo"
 			]
 		},
 		"Items.sol": {
@@ -956,11 +975,11 @@
 			]
 		},
 		"Players.sol": {
-			"keccak256": "0x144f3e854a834f475901f8073f5a4da0009da9b0f36e03782337fb8cdef5db1e",
+			"keccak256": "0x987b61c3930ab6dd08b36ff4f268d5402f826d5ef913e9f611d8d2439eb89b52",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://e6dcfaf894dd1c8b2cb3565a540e33c06bb355f6feee462c71cf945efc471583",
-				"dweb:/ipfs/QmYofxDdjDJNJXsyXFv3Gba4eDQiG7vi5ywb6WyLsnrf5V"
+				"bzz-raw://2906efdcdaed999402705b9c8226ccef614cd5cf65eaed1b1a59628123e9ddb3",
+				"dweb:/ipfs/QmVqLWmPrwbcDBcoiBdpNNsS8aRUG78uUUWKLBZGCcKe1E"
 			]
 		}
 	},

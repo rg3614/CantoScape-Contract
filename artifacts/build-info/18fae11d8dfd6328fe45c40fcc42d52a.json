@@ -1,0 +1,2001 @@
+{
+	"id": "18fae11d8dfd6328fe45c40fcc42d52a",
+	"_format": "hh-sol-build-info-1",
+	"solcVersion": "0.8.18",
+	"solcLongVersion": "0.8.18+commit.87f61d96",
+	"input": {
+		"language": "Solidity",
+		"sources": {
+			"CantoScapeLib.sol": {
+				"content": "// SPDX-License-Identifier: MIT\npragma solidity ^0.8.9;\n\n// Quest Types\nuint256 constant FISHING = 1;\nuint256 constant MINING = 2;\nuint256 constant COMBAT = 3;\nuint256 constant SMITHING = 4;\n\n// Fishing Types\nuint256 constant SHRIMP = 1;\nuint256 constant LOBSTER = 2;\nuint256 constant SHARK = 3;\n\n// Mining & Smithing Types\n// uint256 constant COPPER = 1;\nuint256 constant IRON = 3;\nuint256 constant RUNE = 4;\nuint256 constant CANTO = 5;\nuint256 constant BRONZE = 6;\n\n// NPC Types\nuint256 constant CHICKEN = 1;\nuint256 constant GOBLIN = 2;\nuint256 constant WARRIOR = 3;\nuint256 constant BARBARIAN = 4;\nuint256 constant HILL_GIANT = 5;\nuint256 constant MOSS_GIANT = 6;\nuint256 constant LESSER_DEMON = 7;\nuint256 constant GREATER_DEMON = 8;\n\n// Item Types\nuint256 constant BRONZE_PICKAXE = 1;\nuint256 constant IRON_PICKAXE = 2;\nuint256 constant RUNE_PICKAXE = 3;\n\nuint256 constant FISHING_ROD = 4;\n\nuint256 constant BRONZE_LONGSWORD = 5;\nuint256 constant IRON_LONGSWORD = 6;\nuint256 constant RUNE_LONGSWORD = 7;\n\nuint256 constant BRONZE_FULL_HELM = 8;\nuint256 constant BRONZE_PLATEBODY = 9;\nuint256 constant BRONZE_PLATELEGS = 10;\n\nuint256 constant RAW_SHRIMP = 11;\nuint256 constant RAW_LOBSTER = 12;\nuint256 constant RAW_SHARK = 13;\n\nuint256 constant GOLD = 14;\n\nuint256 constant BRONZE_ORE = 15;\n//uint256 constant COPPER_ORE = 16;\nuint256 constant IRON_ORE = 17;\nuint256 constant RUNE_ORE = 18;\nuint256 constant CANTO_ORE = 19;\n\nuint256 constant BRONZE_BAR = 20;\nuint256 constant COPPER_BAR = 21;\nuint256 constant IRON_BAR = 22;\nuint256 constant RUNE_BAR = 23;\nuint256 constant CANTO_BAR = 24;"
+			}
+		},
+		"settings": {
+			"optimizer": {
+				"enabled": false,
+				"runs": 200
+			},
+			"outputSelection": {
+				"*": {
+					"": [
+						"ast"
+					],
+					"*": [
+						"abi",
+						"metadata",
+						"devdoc",
+						"userdoc",
+						"storageLayout",
+						"evm.legacyAssembly",
+						"evm.bytecode",
+						"evm.deployedBytecode",
+						"evm.methodIdentifiers",
+						"evm.gasEstimates",
+						"evm.assembly"
+					]
+				}
+			}
+		}
+	},
+	"output": {
+		"sources": {
+			"CantoScapeLib.sol": {
+				"ast": {
+					"absolutePath": "CantoScapeLib.sol",
+					"exportedSymbols": {
+						"BARBARIAN": [
+							46
+						],
+						"BRONZE": [
+							34
+						],
+						"BRONZE_BAR": [
+							115
+						],
+						"BRONZE_FULL_HELM": [
+							82
+						],
+						"BRONZE_LONGSWORD": [
+							73
+						],
+						"BRONZE_ORE": [
+							103
+						],
+						"BRONZE_PICKAXE": [
+							61
+						],
+						"BRONZE_PLATEBODY": [
+							85
+						],
+						"BRONZE_PLATELEGS": [
+							88
+						],
+						"CANTO": [
+							31
+						],
+						"CANTO_BAR": [
+							127
+						],
+						"CANTO_ORE": [
+							112
+						],
+						"CHICKEN": [
+							37
+						],
+						"COMBAT": [
+							10
+						],
+						"COPPER_BAR": [
+							118
+						],
+						"FISHING": [
+							4
+						],
+						"FISHING_ROD": [
+							70
+						],
+						"GOBLIN": [
+							40
+						],
+						"GOLD": [
+							100
+						],
+						"GREATER_DEMON": [
+							58
+						],
+						"HILL_GIANT": [
+							49
+						],
+						"IRON": [
+							25
+						],
+						"IRON_BAR": [
+							121
+						],
+						"IRON_LONGSWORD": [
+							76
+						],
+						"IRON_ORE": [
+							106
+						],
+						"IRON_PICKAXE": [
+							64
+						],
+						"LESSER_DEMON": [
+							55
+						],
+						"LOBSTER": [
+							19
+						],
+						"MINING": [
+							7
+						],
+						"MOSS_GIANT": [
+							52
+						],
+						"RAW_LOBSTER": [
+							94
+						],
+						"RAW_SHARK": [
+							97
+						],
+						"RAW_SHRIMP": [
+							91
+						],
+						"RUNE": [
+							28
+						],
+						"RUNE_BAR": [
+							124
+						],
+						"RUNE_LONGSWORD": [
+							79
+						],
+						"RUNE_ORE": [
+							109
+						],
+						"RUNE_PICKAXE": [
+							67
+						],
+						"SHARK": [
+							22
+						],
+						"SHRIMP": [
+							16
+						],
+						"SMITHING": [
+							13
+						],
+						"WARRIOR": [
+							43
+						]
+					},
+					"id": 128,
+					"license": "MIT",
+					"nodeType": "SourceUnit",
+					"nodes": [
+						{
+							"id": 1,
+							"literals": [
+								"solidity",
+								"^",
+								"0.8",
+								".9"
+							],
+							"nodeType": "PragmaDirective",
+							"src": "32:23:0"
+						},
+						{
+							"constant": true,
+							"id": 4,
+							"mutability": "constant",
+							"name": "FISHING",
+							"nameLocation": "89:7:0",
+							"nodeType": "VariableDeclaration",
+							"scope": 128,
+							"src": "72:28:0",
+							"stateVariable": false,
+							"storageLocation": "default",
+							"typeDescriptions": {
+								"typeIdentifier": "t_uint256",
+								"typeString": "uint256"
+							},
+							"typeName": {
+								"id": 2,
+								"name": "uint256",
+								"nodeType": "ElementaryTypeName",
+								"src": "72:7:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_uint256",
+									"typeString": "uint256"
+								}
+							},
+							"value": {
+								"hexValue": "31",
+								"id": 3,
+								"isConstant": false,
+								"isLValue": false,
+								"isPure": true,
+								"kind": "number",
+								"lValueRequested": false,
+								"nodeType": "Literal",
+								"src": "99:1:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_rational_1_by_1",
+									"typeString": "int_const 1"
+								},
+								"value": "1"
+							},
+							"visibility": "internal"
+						},
+						{
+							"constant": true,
+							"id": 7,
+							"mutability": "constant",
+							"name": "MINING",
+							"nameLocation": "119:6:0",
+							"nodeType": "VariableDeclaration",
+							"scope": 128,
+							"src": "102:27:0",
+							"stateVariable": false,
+							"storageLocation": "default",
+							"typeDescriptions": {
+								"typeIdentifier": "t_uint256",
+								"typeString": "uint256"
+							},
+							"typeName": {
+								"id": 5,
+								"name": "uint256",
+								"nodeType": "ElementaryTypeName",
+								"src": "102:7:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_uint256",
+									"typeString": "uint256"
+								}
+							},
+							"value": {
+								"hexValue": "32",
+								"id": 6,
+								"isConstant": false,
+								"isLValue": false,
+								"isPure": true,
+								"kind": "number",
+								"lValueRequested": false,
+								"nodeType": "Literal",
+								"src": "128:1:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_rational_2_by_1",
+									"typeString": "int_const 2"
+								},
+								"value": "2"
+							},
+							"visibility": "internal"
+						},
+						{
+							"constant": true,
+							"id": 10,
+							"mutability": "constant",
+							"name": "COMBAT",
+							"nameLocation": "148:6:0",
+							"nodeType": "VariableDeclaration",
+							"scope": 128,
+							"src": "131:27:0",
+							"stateVariable": false,
+							"storageLocation": "default",
+							"typeDescriptions": {
+								"typeIdentifier": "t_uint256",
+								"typeString": "uint256"
+							},
+							"typeName": {
+								"id": 8,
+								"name": "uint256",
+								"nodeType": "ElementaryTypeName",
+								"src": "131:7:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_uint256",
+									"typeString": "uint256"
+								}
+							},
+							"value": {
+								"hexValue": "33",
+								"id": 9,
+								"isConstant": false,
+								"isLValue": false,
+								"isPure": true,
+								"kind": "number",
+								"lValueRequested": false,
+								"nodeType": "Literal",
+								"src": "157:1:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_rational_3_by_1",
+									"typeString": "int_const 3"
+								},
+								"value": "3"
+							},
+							"visibility": "internal"
+						},
+						{
+							"constant": true,
+							"id": 13,
+							"mutability": "constant",
+							"name": "SMITHING",
+							"nameLocation": "177:8:0",
+							"nodeType": "VariableDeclaration",
+							"scope": 128,
+							"src": "160:29:0",
+							"stateVariable": false,
+							"storageLocation": "default",
+							"typeDescriptions": {
+								"typeIdentifier": "t_uint256",
+								"typeString": "uint256"
+							},
+							"typeName": {
+								"id": 11,
+								"name": "uint256",
+								"nodeType": "ElementaryTypeName",
+								"src": "160:7:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_uint256",
+									"typeString": "uint256"
+								}
+							},
+							"value": {
+								"hexValue": "34",
+								"id": 12,
+								"isConstant": false,
+								"isLValue": false,
+								"isPure": true,
+								"kind": "number",
+								"lValueRequested": false,
+								"nodeType": "Literal",
+								"src": "188:1:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_rational_4_by_1",
+									"typeString": "int_const 4"
+								},
+								"value": "4"
+							},
+							"visibility": "internal"
+						},
+						{
+							"constant": true,
+							"id": 16,
+							"mutability": "constant",
+							"name": "SHRIMP",
+							"nameLocation": "226:6:0",
+							"nodeType": "VariableDeclaration",
+							"scope": 128,
+							"src": "209:27:0",
+							"stateVariable": false,
+							"storageLocation": "default",
+							"typeDescriptions": {
+								"typeIdentifier": "t_uint256",
+								"typeString": "uint256"
+							},
+							"typeName": {
+								"id": 14,
+								"name": "uint256",
+								"nodeType": "ElementaryTypeName",
+								"src": "209:7:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_uint256",
+									"typeString": "uint256"
+								}
+							},
+							"value": {
+								"hexValue": "31",
+								"id": 15,
+								"isConstant": false,
+								"isLValue": false,
+								"isPure": true,
+								"kind": "number",
+								"lValueRequested": false,
+								"nodeType": "Literal",
+								"src": "235:1:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_rational_1_by_1",
+									"typeString": "int_const 1"
+								},
+								"value": "1"
+							},
+							"visibility": "internal"
+						},
+						{
+							"constant": true,
+							"id": 19,
+							"mutability": "constant",
+							"name": "LOBSTER",
+							"nameLocation": "255:7:0",
+							"nodeType": "VariableDeclaration",
+							"scope": 128,
+							"src": "238:28:0",
+							"stateVariable": false,
+							"storageLocation": "default",
+							"typeDescriptions": {
+								"typeIdentifier": "t_uint256",
+								"typeString": "uint256"
+							},
+							"typeName": {
+								"id": 17,
+								"name": "uint256",
+								"nodeType": "ElementaryTypeName",
+								"src": "238:7:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_uint256",
+									"typeString": "uint256"
+								}
+							},
+							"value": {
+								"hexValue": "32",
+								"id": 18,
+								"isConstant": false,
+								"isLValue": false,
+								"isPure": true,
+								"kind": "number",
+								"lValueRequested": false,
+								"nodeType": "Literal",
+								"src": "265:1:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_rational_2_by_1",
+									"typeString": "int_const 2"
+								},
+								"value": "2"
+							},
+							"visibility": "internal"
+						},
+						{
+							"constant": true,
+							"id": 22,
+							"mutability": "constant",
+							"name": "SHARK",
+							"nameLocation": "285:5:0",
+							"nodeType": "VariableDeclaration",
+							"scope": 128,
+							"src": "268:26:0",
+							"stateVariable": false,
+							"storageLocation": "default",
+							"typeDescriptions": {
+								"typeIdentifier": "t_uint256",
+								"typeString": "uint256"
+							},
+							"typeName": {
+								"id": 20,
+								"name": "uint256",
+								"nodeType": "ElementaryTypeName",
+								"src": "268:7:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_uint256",
+									"typeString": "uint256"
+								}
+							},
+							"value": {
+								"hexValue": "33",
+								"id": 21,
+								"isConstant": false,
+								"isLValue": false,
+								"isPure": true,
+								"kind": "number",
+								"lValueRequested": false,
+								"nodeType": "Literal",
+								"src": "293:1:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_rational_3_by_1",
+									"typeString": "int_const 3"
+								},
+								"value": "3"
+							},
+							"visibility": "internal"
+						},
+						{
+							"constant": true,
+							"id": 25,
+							"mutability": "constant",
+							"name": "IRON",
+							"nameLocation": "373:4:0",
+							"nodeType": "VariableDeclaration",
+							"scope": 128,
+							"src": "356:25:0",
+							"stateVariable": false,
+							"storageLocation": "default",
+							"typeDescriptions": {
+								"typeIdentifier": "t_uint256",
+								"typeString": "uint256"
+							},
+							"typeName": {
+								"id": 23,
+								"name": "uint256",
+								"nodeType": "ElementaryTypeName",
+								"src": "356:7:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_uint256",
+									"typeString": "uint256"
+								}
+							},
+							"value": {
+								"hexValue": "33",
+								"id": 24,
+								"isConstant": false,
+								"isLValue": false,
+								"isPure": true,
+								"kind": "number",
+								"lValueRequested": false,
+								"nodeType": "Literal",
+								"src": "380:1:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_rational_3_by_1",
+									"typeString": "int_const 3"
+								},
+								"value": "3"
+							},
+							"visibility": "internal"
+						},
+						{
+							"constant": true,
+							"id": 28,
+							"mutability": "constant",
+							"name": "RUNE",
+							"nameLocation": "400:4:0",
+							"nodeType": "VariableDeclaration",
+							"scope": 128,
+							"src": "383:25:0",
+							"stateVariable": false,
+							"storageLocation": "default",
+							"typeDescriptions": {
+								"typeIdentifier": "t_uint256",
+								"typeString": "uint256"
+							},
+							"typeName": {
+								"id": 26,
+								"name": "uint256",
+								"nodeType": "ElementaryTypeName",
+								"src": "383:7:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_uint256",
+									"typeString": "uint256"
+								}
+							},
+							"value": {
+								"hexValue": "34",
+								"id": 27,
+								"isConstant": false,
+								"isLValue": false,
+								"isPure": true,
+								"kind": "number",
+								"lValueRequested": false,
+								"nodeType": "Literal",
+								"src": "407:1:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_rational_4_by_1",
+									"typeString": "int_const 4"
+								},
+								"value": "4"
+							},
+							"visibility": "internal"
+						},
+						{
+							"constant": true,
+							"id": 31,
+							"mutability": "constant",
+							"name": "CANTO",
+							"nameLocation": "427:5:0",
+							"nodeType": "VariableDeclaration",
+							"scope": 128,
+							"src": "410:26:0",
+							"stateVariable": false,
+							"storageLocation": "default",
+							"typeDescriptions": {
+								"typeIdentifier": "t_uint256",
+								"typeString": "uint256"
+							},
+							"typeName": {
+								"id": 29,
+								"name": "uint256",
+								"nodeType": "ElementaryTypeName",
+								"src": "410:7:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_uint256",
+									"typeString": "uint256"
+								}
+							},
+							"value": {
+								"hexValue": "35",
+								"id": 30,
+								"isConstant": false,
+								"isLValue": false,
+								"isPure": true,
+								"kind": "number",
+								"lValueRequested": false,
+								"nodeType": "Literal",
+								"src": "435:1:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_rational_5_by_1",
+									"typeString": "int_const 5"
+								},
+								"value": "5"
+							},
+							"visibility": "internal"
+						},
+						{
+							"constant": true,
+							"id": 34,
+							"mutability": "constant",
+							"name": "BRONZE",
+							"nameLocation": "455:6:0",
+							"nodeType": "VariableDeclaration",
+							"scope": 128,
+							"src": "438:27:0",
+							"stateVariable": false,
+							"storageLocation": "default",
+							"typeDescriptions": {
+								"typeIdentifier": "t_uint256",
+								"typeString": "uint256"
+							},
+							"typeName": {
+								"id": 32,
+								"name": "uint256",
+								"nodeType": "ElementaryTypeName",
+								"src": "438:7:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_uint256",
+									"typeString": "uint256"
+								}
+							},
+							"value": {
+								"hexValue": "36",
+								"id": 33,
+								"isConstant": false,
+								"isLValue": false,
+								"isPure": true,
+								"kind": "number",
+								"lValueRequested": false,
+								"nodeType": "Literal",
+								"src": "464:1:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_rational_6_by_1",
+									"typeString": "int_const 6"
+								},
+								"value": "6"
+							},
+							"visibility": "internal"
+						},
+						{
+							"constant": true,
+							"id": 37,
+							"mutability": "constant",
+							"name": "CHICKEN",
+							"nameLocation": "498:7:0",
+							"nodeType": "VariableDeclaration",
+							"scope": 128,
+							"src": "481:28:0",
+							"stateVariable": false,
+							"storageLocation": "default",
+							"typeDescriptions": {
+								"typeIdentifier": "t_uint256",
+								"typeString": "uint256"
+							},
+							"typeName": {
+								"id": 35,
+								"name": "uint256",
+								"nodeType": "ElementaryTypeName",
+								"src": "481:7:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_uint256",
+									"typeString": "uint256"
+								}
+							},
+							"value": {
+								"hexValue": "31",
+								"id": 36,
+								"isConstant": false,
+								"isLValue": false,
+								"isPure": true,
+								"kind": "number",
+								"lValueRequested": false,
+								"nodeType": "Literal",
+								"src": "508:1:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_rational_1_by_1",
+									"typeString": "int_const 1"
+								},
+								"value": "1"
+							},
+							"visibility": "internal"
+						},
+						{
+							"constant": true,
+							"id": 40,
+							"mutability": "constant",
+							"name": "GOBLIN",
+							"nameLocation": "528:6:0",
+							"nodeType": "VariableDeclaration",
+							"scope": 128,
+							"src": "511:27:0",
+							"stateVariable": false,
+							"storageLocation": "default",
+							"typeDescriptions": {
+								"typeIdentifier": "t_uint256",
+								"typeString": "uint256"
+							},
+							"typeName": {
+								"id": 38,
+								"name": "uint256",
+								"nodeType": "ElementaryTypeName",
+								"src": "511:7:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_uint256",
+									"typeString": "uint256"
+								}
+							},
+							"value": {
+								"hexValue": "32",
+								"id": 39,
+								"isConstant": false,
+								"isLValue": false,
+								"isPure": true,
+								"kind": "number",
+								"lValueRequested": false,
+								"nodeType": "Literal",
+								"src": "537:1:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_rational_2_by_1",
+									"typeString": "int_const 2"
+								},
+								"value": "2"
+							},
+							"visibility": "internal"
+						},
+						{
+							"constant": true,
+							"id": 43,
+							"mutability": "constant",
+							"name": "WARRIOR",
+							"nameLocation": "557:7:0",
+							"nodeType": "VariableDeclaration",
+							"scope": 128,
+							"src": "540:28:0",
+							"stateVariable": false,
+							"storageLocation": "default",
+							"typeDescriptions": {
+								"typeIdentifier": "t_uint256",
+								"typeString": "uint256"
+							},
+							"typeName": {
+								"id": 41,
+								"name": "uint256",
+								"nodeType": "ElementaryTypeName",
+								"src": "540:7:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_uint256",
+									"typeString": "uint256"
+								}
+							},
+							"value": {
+								"hexValue": "33",
+								"id": 42,
+								"isConstant": false,
+								"isLValue": false,
+								"isPure": true,
+								"kind": "number",
+								"lValueRequested": false,
+								"nodeType": "Literal",
+								"src": "567:1:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_rational_3_by_1",
+									"typeString": "int_const 3"
+								},
+								"value": "3"
+							},
+							"visibility": "internal"
+						},
+						{
+							"constant": true,
+							"id": 46,
+							"mutability": "constant",
+							"name": "BARBARIAN",
+							"nameLocation": "587:9:0",
+							"nodeType": "VariableDeclaration",
+							"scope": 128,
+							"src": "570:30:0",
+							"stateVariable": false,
+							"storageLocation": "default",
+							"typeDescriptions": {
+								"typeIdentifier": "t_uint256",
+								"typeString": "uint256"
+							},
+							"typeName": {
+								"id": 44,
+								"name": "uint256",
+								"nodeType": "ElementaryTypeName",
+								"src": "570:7:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_uint256",
+									"typeString": "uint256"
+								}
+							},
+							"value": {
+								"hexValue": "34",
+								"id": 45,
+								"isConstant": false,
+								"isLValue": false,
+								"isPure": true,
+								"kind": "number",
+								"lValueRequested": false,
+								"nodeType": "Literal",
+								"src": "599:1:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_rational_4_by_1",
+									"typeString": "int_const 4"
+								},
+								"value": "4"
+							},
+							"visibility": "internal"
+						},
+						{
+							"constant": true,
+							"id": 49,
+							"mutability": "constant",
+							"name": "HILL_GIANT",
+							"nameLocation": "619:10:0",
+							"nodeType": "VariableDeclaration",
+							"scope": 128,
+							"src": "602:31:0",
+							"stateVariable": false,
+							"storageLocation": "default",
+							"typeDescriptions": {
+								"typeIdentifier": "t_uint256",
+								"typeString": "uint256"
+							},
+							"typeName": {
+								"id": 47,
+								"name": "uint256",
+								"nodeType": "ElementaryTypeName",
+								"src": "602:7:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_uint256",
+									"typeString": "uint256"
+								}
+							},
+							"value": {
+								"hexValue": "35",
+								"id": 48,
+								"isConstant": false,
+								"isLValue": false,
+								"isPure": true,
+								"kind": "number",
+								"lValueRequested": false,
+								"nodeType": "Literal",
+								"src": "632:1:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_rational_5_by_1",
+									"typeString": "int_const 5"
+								},
+								"value": "5"
+							},
+							"visibility": "internal"
+						},
+						{
+							"constant": true,
+							"id": 52,
+							"mutability": "constant",
+							"name": "MOSS_GIANT",
+							"nameLocation": "652:10:0",
+							"nodeType": "VariableDeclaration",
+							"scope": 128,
+							"src": "635:31:0",
+							"stateVariable": false,
+							"storageLocation": "default",
+							"typeDescriptions": {
+								"typeIdentifier": "t_uint256",
+								"typeString": "uint256"
+							},
+							"typeName": {
+								"id": 50,
+								"name": "uint256",
+								"nodeType": "ElementaryTypeName",
+								"src": "635:7:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_uint256",
+									"typeString": "uint256"
+								}
+							},
+							"value": {
+								"hexValue": "36",
+								"id": 51,
+								"isConstant": false,
+								"isLValue": false,
+								"isPure": true,
+								"kind": "number",
+								"lValueRequested": false,
+								"nodeType": "Literal",
+								"src": "665:1:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_rational_6_by_1",
+									"typeString": "int_const 6"
+								},
+								"value": "6"
+							},
+							"visibility": "internal"
+						},
+						{
+							"constant": true,
+							"id": 55,
+							"mutability": "constant",
+							"name": "LESSER_DEMON",
+							"nameLocation": "685:12:0",
+							"nodeType": "VariableDeclaration",
+							"scope": 128,
+							"src": "668:33:0",
+							"stateVariable": false,
+							"storageLocation": "default",
+							"typeDescriptions": {
+								"typeIdentifier": "t_uint256",
+								"typeString": "uint256"
+							},
+							"typeName": {
+								"id": 53,
+								"name": "uint256",
+								"nodeType": "ElementaryTypeName",
+								"src": "668:7:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_uint256",
+									"typeString": "uint256"
+								}
+							},
+							"value": {
+								"hexValue": "37",
+								"id": 54,
+								"isConstant": false,
+								"isLValue": false,
+								"isPure": true,
+								"kind": "number",
+								"lValueRequested": false,
+								"nodeType": "Literal",
+								"src": "700:1:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_rational_7_by_1",
+									"typeString": "int_const 7"
+								},
+								"value": "7"
+							},
+							"visibility": "internal"
+						},
+						{
+							"constant": true,
+							"id": 58,
+							"mutability": "constant",
+							"name": "GREATER_DEMON",
+							"nameLocation": "720:13:0",
+							"nodeType": "VariableDeclaration",
+							"scope": 128,
+							"src": "703:34:0",
+							"stateVariable": false,
+							"storageLocation": "default",
+							"typeDescriptions": {
+								"typeIdentifier": "t_uint256",
+								"typeString": "uint256"
+							},
+							"typeName": {
+								"id": 56,
+								"name": "uint256",
+								"nodeType": "ElementaryTypeName",
+								"src": "703:7:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_uint256",
+									"typeString": "uint256"
+								}
+							},
+							"value": {
+								"hexValue": "38",
+								"id": 57,
+								"isConstant": false,
+								"isLValue": false,
+								"isPure": true,
+								"kind": "number",
+								"lValueRequested": false,
+								"nodeType": "Literal",
+								"src": "736:1:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_rational_8_by_1",
+									"typeString": "int_const 8"
+								},
+								"value": "8"
+							},
+							"visibility": "internal"
+						},
+						{
+							"constant": true,
+							"id": 61,
+							"mutability": "constant",
+							"name": "BRONZE_PICKAXE",
+							"nameLocation": "771:14:0",
+							"nodeType": "VariableDeclaration",
+							"scope": 128,
+							"src": "754:35:0",
+							"stateVariable": false,
+							"storageLocation": "default",
+							"typeDescriptions": {
+								"typeIdentifier": "t_uint256",
+								"typeString": "uint256"
+							},
+							"typeName": {
+								"id": 59,
+								"name": "uint256",
+								"nodeType": "ElementaryTypeName",
+								"src": "754:7:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_uint256",
+									"typeString": "uint256"
+								}
+							},
+							"value": {
+								"hexValue": "31",
+								"id": 60,
+								"isConstant": false,
+								"isLValue": false,
+								"isPure": true,
+								"kind": "number",
+								"lValueRequested": false,
+								"nodeType": "Literal",
+								"src": "788:1:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_rational_1_by_1",
+									"typeString": "int_const 1"
+								},
+								"value": "1"
+							},
+							"visibility": "internal"
+						},
+						{
+							"constant": true,
+							"id": 64,
+							"mutability": "constant",
+							"name": "IRON_PICKAXE",
+							"nameLocation": "808:12:0",
+							"nodeType": "VariableDeclaration",
+							"scope": 128,
+							"src": "791:33:0",
+							"stateVariable": false,
+							"storageLocation": "default",
+							"typeDescriptions": {
+								"typeIdentifier": "t_uint256",
+								"typeString": "uint256"
+							},
+							"typeName": {
+								"id": 62,
+								"name": "uint256",
+								"nodeType": "ElementaryTypeName",
+								"src": "791:7:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_uint256",
+									"typeString": "uint256"
+								}
+							},
+							"value": {
+								"hexValue": "32",
+								"id": 63,
+								"isConstant": false,
+								"isLValue": false,
+								"isPure": true,
+								"kind": "number",
+								"lValueRequested": false,
+								"nodeType": "Literal",
+								"src": "823:1:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_rational_2_by_1",
+									"typeString": "int_const 2"
+								},
+								"value": "2"
+							},
+							"visibility": "internal"
+						},
+						{
+							"constant": true,
+							"id": 67,
+							"mutability": "constant",
+							"name": "RUNE_PICKAXE",
+							"nameLocation": "843:12:0",
+							"nodeType": "VariableDeclaration",
+							"scope": 128,
+							"src": "826:33:0",
+							"stateVariable": false,
+							"storageLocation": "default",
+							"typeDescriptions": {
+								"typeIdentifier": "t_uint256",
+								"typeString": "uint256"
+							},
+							"typeName": {
+								"id": 65,
+								"name": "uint256",
+								"nodeType": "ElementaryTypeName",
+								"src": "826:7:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_uint256",
+									"typeString": "uint256"
+								}
+							},
+							"value": {
+								"hexValue": "33",
+								"id": 66,
+								"isConstant": false,
+								"isLValue": false,
+								"isPure": true,
+								"kind": "number",
+								"lValueRequested": false,
+								"nodeType": "Literal",
+								"src": "858:1:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_rational_3_by_1",
+									"typeString": "int_const 3"
+								},
+								"value": "3"
+							},
+							"visibility": "internal"
+						},
+						{
+							"constant": true,
+							"id": 70,
+							"mutability": "constant",
+							"name": "FISHING_ROD",
+							"nameLocation": "879:11:0",
+							"nodeType": "VariableDeclaration",
+							"scope": 128,
+							"src": "862:32:0",
+							"stateVariable": false,
+							"storageLocation": "default",
+							"typeDescriptions": {
+								"typeIdentifier": "t_uint256",
+								"typeString": "uint256"
+							},
+							"typeName": {
+								"id": 68,
+								"name": "uint256",
+								"nodeType": "ElementaryTypeName",
+								"src": "862:7:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_uint256",
+									"typeString": "uint256"
+								}
+							},
+							"value": {
+								"hexValue": "34",
+								"id": 69,
+								"isConstant": false,
+								"isLValue": false,
+								"isPure": true,
+								"kind": "number",
+								"lValueRequested": false,
+								"nodeType": "Literal",
+								"src": "893:1:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_rational_4_by_1",
+									"typeString": "int_const 4"
+								},
+								"value": "4"
+							},
+							"visibility": "internal"
+						},
+						{
+							"constant": true,
+							"id": 73,
+							"mutability": "constant",
+							"name": "BRONZE_LONGSWORD",
+							"nameLocation": "914:16:0",
+							"nodeType": "VariableDeclaration",
+							"scope": 128,
+							"src": "897:37:0",
+							"stateVariable": false,
+							"storageLocation": "default",
+							"typeDescriptions": {
+								"typeIdentifier": "t_uint256",
+								"typeString": "uint256"
+							},
+							"typeName": {
+								"id": 71,
+								"name": "uint256",
+								"nodeType": "ElementaryTypeName",
+								"src": "897:7:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_uint256",
+									"typeString": "uint256"
+								}
+							},
+							"value": {
+								"hexValue": "35",
+								"id": 72,
+								"isConstant": false,
+								"isLValue": false,
+								"isPure": true,
+								"kind": "number",
+								"lValueRequested": false,
+								"nodeType": "Literal",
+								"src": "933:1:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_rational_5_by_1",
+									"typeString": "int_const 5"
+								},
+								"value": "5"
+							},
+							"visibility": "internal"
+						},
+						{
+							"constant": true,
+							"id": 76,
+							"mutability": "constant",
+							"name": "IRON_LONGSWORD",
+							"nameLocation": "953:14:0",
+							"nodeType": "VariableDeclaration",
+							"scope": 128,
+							"src": "936:35:0",
+							"stateVariable": false,
+							"storageLocation": "default",
+							"typeDescriptions": {
+								"typeIdentifier": "t_uint256",
+								"typeString": "uint256"
+							},
+							"typeName": {
+								"id": 74,
+								"name": "uint256",
+								"nodeType": "ElementaryTypeName",
+								"src": "936:7:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_uint256",
+									"typeString": "uint256"
+								}
+							},
+							"value": {
+								"hexValue": "36",
+								"id": 75,
+								"isConstant": false,
+								"isLValue": false,
+								"isPure": true,
+								"kind": "number",
+								"lValueRequested": false,
+								"nodeType": "Literal",
+								"src": "970:1:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_rational_6_by_1",
+									"typeString": "int_const 6"
+								},
+								"value": "6"
+							},
+							"visibility": "internal"
+						},
+						{
+							"constant": true,
+							"id": 79,
+							"mutability": "constant",
+							"name": "RUNE_LONGSWORD",
+							"nameLocation": "990:14:0",
+							"nodeType": "VariableDeclaration",
+							"scope": 128,
+							"src": "973:35:0",
+							"stateVariable": false,
+							"storageLocation": "default",
+							"typeDescriptions": {
+								"typeIdentifier": "t_uint256",
+								"typeString": "uint256"
+							},
+							"typeName": {
+								"id": 77,
+								"name": "uint256",
+								"nodeType": "ElementaryTypeName",
+								"src": "973:7:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_uint256",
+									"typeString": "uint256"
+								}
+							},
+							"value": {
+								"hexValue": "37",
+								"id": 78,
+								"isConstant": false,
+								"isLValue": false,
+								"isPure": true,
+								"kind": "number",
+								"lValueRequested": false,
+								"nodeType": "Literal",
+								"src": "1007:1:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_rational_7_by_1",
+									"typeString": "int_const 7"
+								},
+								"value": "7"
+							},
+							"visibility": "internal"
+						},
+						{
+							"constant": true,
+							"id": 82,
+							"mutability": "constant",
+							"name": "BRONZE_FULL_HELM",
+							"nameLocation": "1028:16:0",
+							"nodeType": "VariableDeclaration",
+							"scope": 128,
+							"src": "1011:37:0",
+							"stateVariable": false,
+							"storageLocation": "default",
+							"typeDescriptions": {
+								"typeIdentifier": "t_uint256",
+								"typeString": "uint256"
+							},
+							"typeName": {
+								"id": 80,
+								"name": "uint256",
+								"nodeType": "ElementaryTypeName",
+								"src": "1011:7:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_uint256",
+									"typeString": "uint256"
+								}
+							},
+							"value": {
+								"hexValue": "38",
+								"id": 81,
+								"isConstant": false,
+								"isLValue": false,
+								"isPure": true,
+								"kind": "number",
+								"lValueRequested": false,
+								"nodeType": "Literal",
+								"src": "1047:1:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_rational_8_by_1",
+									"typeString": "int_const 8"
+								},
+								"value": "8"
+							},
+							"visibility": "internal"
+						},
+						{
+							"constant": true,
+							"id": 85,
+							"mutability": "constant",
+							"name": "BRONZE_PLATEBODY",
+							"nameLocation": "1067:16:0",
+							"nodeType": "VariableDeclaration",
+							"scope": 128,
+							"src": "1050:37:0",
+							"stateVariable": false,
+							"storageLocation": "default",
+							"typeDescriptions": {
+								"typeIdentifier": "t_uint256",
+								"typeString": "uint256"
+							},
+							"typeName": {
+								"id": 83,
+								"name": "uint256",
+								"nodeType": "ElementaryTypeName",
+								"src": "1050:7:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_uint256",
+									"typeString": "uint256"
+								}
+							},
+							"value": {
+								"hexValue": "39",
+								"id": 84,
+								"isConstant": false,
+								"isLValue": false,
+								"isPure": true,
+								"kind": "number",
+								"lValueRequested": false,
+								"nodeType": "Literal",
+								"src": "1086:1:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_rational_9_by_1",
+									"typeString": "int_const 9"
+								},
+								"value": "9"
+							},
+							"visibility": "internal"
+						},
+						{
+							"constant": true,
+							"id": 88,
+							"mutability": "constant",
+							"name": "BRONZE_PLATELEGS",
+							"nameLocation": "1106:16:0",
+							"nodeType": "VariableDeclaration",
+							"scope": 128,
+							"src": "1089:38:0",
+							"stateVariable": false,
+							"storageLocation": "default",
+							"typeDescriptions": {
+								"typeIdentifier": "t_uint256",
+								"typeString": "uint256"
+							},
+							"typeName": {
+								"id": 86,
+								"name": "uint256",
+								"nodeType": "ElementaryTypeName",
+								"src": "1089:7:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_uint256",
+									"typeString": "uint256"
+								}
+							},
+							"value": {
+								"hexValue": "3130",
+								"id": 87,
+								"isConstant": false,
+								"isLValue": false,
+								"isPure": true,
+								"kind": "number",
+								"lValueRequested": false,
+								"nodeType": "Literal",
+								"src": "1125:2:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_rational_10_by_1",
+									"typeString": "int_const 10"
+								},
+								"value": "10"
+							},
+							"visibility": "internal"
+						},
+						{
+							"constant": true,
+							"id": 91,
+							"mutability": "constant",
+							"name": "RAW_SHRIMP",
+							"nameLocation": "1147:10:0",
+							"nodeType": "VariableDeclaration",
+							"scope": 128,
+							"src": "1130:32:0",
+							"stateVariable": false,
+							"storageLocation": "default",
+							"typeDescriptions": {
+								"typeIdentifier": "t_uint256",
+								"typeString": "uint256"
+							},
+							"typeName": {
+								"id": 89,
+								"name": "uint256",
+								"nodeType": "ElementaryTypeName",
+								"src": "1130:7:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_uint256",
+									"typeString": "uint256"
+								}
+							},
+							"value": {
+								"hexValue": "3131",
+								"id": 90,
+								"isConstant": false,
+								"isLValue": false,
+								"isPure": true,
+								"kind": "number",
+								"lValueRequested": false,
+								"nodeType": "Literal",
+								"src": "1160:2:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_rational_11_by_1",
+									"typeString": "int_const 11"
+								},
+								"value": "11"
+							},
+							"visibility": "internal"
+						},
+						{
+							"constant": true,
+							"id": 94,
+							"mutability": "constant",
+							"name": "RAW_LOBSTER",
+							"nameLocation": "1181:11:0",
+							"nodeType": "VariableDeclaration",
+							"scope": 128,
+							"src": "1164:33:0",
+							"stateVariable": false,
+							"storageLocation": "default",
+							"typeDescriptions": {
+								"typeIdentifier": "t_uint256",
+								"typeString": "uint256"
+							},
+							"typeName": {
+								"id": 92,
+								"name": "uint256",
+								"nodeType": "ElementaryTypeName",
+								"src": "1164:7:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_uint256",
+									"typeString": "uint256"
+								}
+							},
+							"value": {
+								"hexValue": "3132",
+								"id": 93,
+								"isConstant": false,
+								"isLValue": false,
+								"isPure": true,
+								"kind": "number",
+								"lValueRequested": false,
+								"nodeType": "Literal",
+								"src": "1195:2:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_rational_12_by_1",
+									"typeString": "int_const 12"
+								},
+								"value": "12"
+							},
+							"visibility": "internal"
+						},
+						{
+							"constant": true,
+							"id": 97,
+							"mutability": "constant",
+							"name": "RAW_SHARK",
+							"nameLocation": "1216:9:0",
+							"nodeType": "VariableDeclaration",
+							"scope": 128,
+							"src": "1199:31:0",
+							"stateVariable": false,
+							"storageLocation": "default",
+							"typeDescriptions": {
+								"typeIdentifier": "t_uint256",
+								"typeString": "uint256"
+							},
+							"typeName": {
+								"id": 95,
+								"name": "uint256",
+								"nodeType": "ElementaryTypeName",
+								"src": "1199:7:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_uint256",
+									"typeString": "uint256"
+								}
+							},
+							"value": {
+								"hexValue": "3133",
+								"id": 96,
+								"isConstant": false,
+								"isLValue": false,
+								"isPure": true,
+								"kind": "number",
+								"lValueRequested": false,
+								"nodeType": "Literal",
+								"src": "1228:2:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_rational_13_by_1",
+									"typeString": "int_const 13"
+								},
+								"value": "13"
+							},
+							"visibility": "internal"
+						},
+						{
+							"constant": true,
+							"id": 100,
+							"mutability": "constant",
+							"name": "GOLD",
+							"nameLocation": "1250:4:0",
+							"nodeType": "VariableDeclaration",
+							"scope": 128,
+							"src": "1233:26:0",
+							"stateVariable": false,
+							"storageLocation": "default",
+							"typeDescriptions": {
+								"typeIdentifier": "t_uint256",
+								"typeString": "uint256"
+							},
+							"typeName": {
+								"id": 98,
+								"name": "uint256",
+								"nodeType": "ElementaryTypeName",
+								"src": "1233:7:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_uint256",
+									"typeString": "uint256"
+								}
+							},
+							"value": {
+								"hexValue": "3134",
+								"id": 99,
+								"isConstant": false,
+								"isLValue": false,
+								"isPure": true,
+								"kind": "number",
+								"lValueRequested": false,
+								"nodeType": "Literal",
+								"src": "1257:2:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_rational_14_by_1",
+									"typeString": "int_const 14"
+								},
+								"value": "14"
+							},
+							"visibility": "internal"
+						},
+						{
+							"constant": true,
+							"id": 103,
+							"mutability": "constant",
+							"name": "BRONZE_ORE",
+							"nameLocation": "1279:10:0",
+							"nodeType": "VariableDeclaration",
+							"scope": 128,
+							"src": "1262:32:0",
+							"stateVariable": false,
+							"storageLocation": "default",
+							"typeDescriptions": {
+								"typeIdentifier": "t_uint256",
+								"typeString": "uint256"
+							},
+							"typeName": {
+								"id": 101,
+								"name": "uint256",
+								"nodeType": "ElementaryTypeName",
+								"src": "1262:7:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_uint256",
+									"typeString": "uint256"
+								}
+							},
+							"value": {
+								"hexValue": "3135",
+								"id": 102,
+								"isConstant": false,
+								"isLValue": false,
+								"isPure": true,
+								"kind": "number",
+								"lValueRequested": false,
+								"nodeType": "Literal",
+								"src": "1292:2:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_rational_15_by_1",
+									"typeString": "int_const 15"
+								},
+								"value": "15"
+							},
+							"visibility": "internal"
+						},
+						{
+							"constant": true,
+							"id": 106,
+							"mutability": "constant",
+							"name": "IRON_ORE",
+							"nameLocation": "1349:8:0",
+							"nodeType": "VariableDeclaration",
+							"scope": 128,
+							"src": "1332:30:0",
+							"stateVariable": false,
+							"storageLocation": "default",
+							"typeDescriptions": {
+								"typeIdentifier": "t_uint256",
+								"typeString": "uint256"
+							},
+							"typeName": {
+								"id": 104,
+								"name": "uint256",
+								"nodeType": "ElementaryTypeName",
+								"src": "1332:7:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_uint256",
+									"typeString": "uint256"
+								}
+							},
+							"value": {
+								"hexValue": "3137",
+								"id": 105,
+								"isConstant": false,
+								"isLValue": false,
+								"isPure": true,
+								"kind": "number",
+								"lValueRequested": false,
+								"nodeType": "Literal",
+								"src": "1360:2:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_rational_17_by_1",
+									"typeString": "int_const 17"
+								},
+								"value": "17"
+							},
+							"visibility": "internal"
+						},
+						{
+							"constant": true,
+							"id": 109,
+							"mutability": "constant",
+							"name": "RUNE_ORE",
+							"nameLocation": "1381:8:0",
+							"nodeType": "VariableDeclaration",
+							"scope": 128,
+							"src": "1364:30:0",
+							"stateVariable": false,
+							"storageLocation": "default",
+							"typeDescriptions": {
+								"typeIdentifier": "t_uint256",
+								"typeString": "uint256"
+							},
+							"typeName": {
+								"id": 107,
+								"name": "uint256",
+								"nodeType": "ElementaryTypeName",
+								"src": "1364:7:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_uint256",
+									"typeString": "uint256"
+								}
+							},
+							"value": {
+								"hexValue": "3138",
+								"id": 108,
+								"isConstant": false,
+								"isLValue": false,
+								"isPure": true,
+								"kind": "number",
+								"lValueRequested": false,
+								"nodeType": "Literal",
+								"src": "1392:2:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_rational_18_by_1",
+									"typeString": "int_const 18"
+								},
+								"value": "18"
+							},
+							"visibility": "internal"
+						},
+						{
+							"constant": true,
+							"id": 112,
+							"mutability": "constant",
+							"name": "CANTO_ORE",
+							"nameLocation": "1413:9:0",
+							"nodeType": "VariableDeclaration",
+							"scope": 128,
+							"src": "1396:31:0",
+							"stateVariable": false,
+							"storageLocation": "default",
+							"typeDescriptions": {
+								"typeIdentifier": "t_uint256",
+								"typeString": "uint256"
+							},
+							"typeName": {
+								"id": 110,
+								"name": "uint256",
+								"nodeType": "ElementaryTypeName",
+								"src": "1396:7:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_uint256",
+									"typeString": "uint256"
+								}
+							},
+							"value": {
+								"hexValue": "3139",
+								"id": 111,
+								"isConstant": false,
+								"isLValue": false,
+								"isPure": true,
+								"kind": "number",
+								"lValueRequested": false,
+								"nodeType": "Literal",
+								"src": "1425:2:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_rational_19_by_1",
+									"typeString": "int_const 19"
+								},
+								"value": "19"
+							},
+							"visibility": "internal"
+						},
+						{
+							"constant": true,
+							"id": 115,
+							"mutability": "constant",
+							"name": "BRONZE_BAR",
+							"nameLocation": "1447:10:0",
+							"nodeType": "VariableDeclaration",
+							"scope": 128,
+							"src": "1430:32:0",
+							"stateVariable": false,
+							"storageLocation": "default",
+							"typeDescriptions": {
+								"typeIdentifier": "t_uint256",
+								"typeString": "uint256"
+							},
+							"typeName": {
+								"id": 113,
+								"name": "uint256",
+								"nodeType": "ElementaryTypeName",
+								"src": "1430:7:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_uint256",
+									"typeString": "uint256"
+								}
+							},
+							"value": {
+								"hexValue": "3230",
+								"id": 114,
+								"isConstant": false,
+								"isLValue": false,
+								"isPure": true,
+								"kind": "number",
+								"lValueRequested": false,
+								"nodeType": "Literal",
+								"src": "1460:2:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_rational_20_by_1",
+									"typeString": "int_const 20"
+								},
+								"value": "20"
+							},
+							"visibility": "internal"
+						},
+						{
+							"constant": true,
+							"id": 118,
+							"mutability": "constant",
+							"name": "COPPER_BAR",
+							"nameLocation": "1481:10:0",
+							"nodeType": "VariableDeclaration",
+							"scope": 128,
+							"src": "1464:32:0",
+							"stateVariable": false,
+							"storageLocation": "default",
+							"typeDescriptions": {
+								"typeIdentifier": "t_uint256",
+								"typeString": "uint256"
+							},
+							"typeName": {
+								"id": 116,
+								"name": "uint256",
+								"nodeType": "ElementaryTypeName",
+								"src": "1464:7:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_uint256",
+									"typeString": "uint256"
+								}
+							},
+							"value": {
+								"hexValue": "3231",
+								"id": 117,
+								"isConstant": false,
+								"isLValue": false,
+								"isPure": true,
+								"kind": "number",
+								"lValueRequested": false,
+								"nodeType": "Literal",
+								"src": "1494:2:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_rational_21_by_1",
+									"typeString": "int_const 21"
+								},
+								"value": "21"
+							},
+							"visibility": "internal"
+						},
+						{
+							"constant": true,
+							"id": 121,
+							"mutability": "constant",
+							"name": "IRON_BAR",
+							"nameLocation": "1515:8:0",
+							"nodeType": "VariableDeclaration",
+							"scope": 128,
+							"src": "1498:30:0",
+							"stateVariable": false,
+							"storageLocation": "default",
+							"typeDescriptions": {
+								"typeIdentifier": "t_uint256",
+								"typeString": "uint256"
+							},
+							"typeName": {
+								"id": 119,
+								"name": "uint256",
+								"nodeType": "ElementaryTypeName",
+								"src": "1498:7:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_uint256",
+									"typeString": "uint256"
+								}
+							},
+							"value": {
+								"hexValue": "3232",
+								"id": 120,
+								"isConstant": false,
+								"isLValue": false,
+								"isPure": true,
+								"kind": "number",
+								"lValueRequested": false,
+								"nodeType": "Literal",
+								"src": "1526:2:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_rational_22_by_1",
+									"typeString": "int_const 22"
+								},
+								"value": "22"
+							},
+							"visibility": "internal"
+						},
+						{
+							"constant": true,
+							"id": 124,
+							"mutability": "constant",
+							"name": "RUNE_BAR",
+							"nameLocation": "1547:8:0",
+							"nodeType": "VariableDeclaration",
+							"scope": 128,
+							"src": "1530:30:0",
+							"stateVariable": false,
+							"storageLocation": "default",
+							"typeDescriptions": {
+								"typeIdentifier": "t_uint256",
+								"typeString": "uint256"
+							},
+							"typeName": {
+								"id": 122,
+								"name": "uint256",
+								"nodeType": "ElementaryTypeName",
+								"src": "1530:7:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_uint256",
+									"typeString": "uint256"
+								}
+							},
+							"value": {
+								"hexValue": "3233",
+								"id": 123,
+								"isConstant": false,
+								"isLValue": false,
+								"isPure": true,
+								"kind": "number",
+								"lValueRequested": false,
+								"nodeType": "Literal",
+								"src": "1558:2:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_rational_23_by_1",
+									"typeString": "int_const 23"
+								},
+								"value": "23"
+							},
+							"visibility": "internal"
+						},
+						{
+							"constant": true,
+							"id": 127,
+							"mutability": "constant",
+							"name": "CANTO_BAR",
+							"nameLocation": "1579:9:0",
+							"nodeType": "VariableDeclaration",
+							"scope": 128,
+							"src": "1562:31:0",
+							"stateVariable": false,
+							"storageLocation": "default",
+							"typeDescriptions": {
+								"typeIdentifier": "t_uint256",
+								"typeString": "uint256"
+							},
+							"typeName": {
+								"id": 125,
+								"name": "uint256",
+								"nodeType": "ElementaryTypeName",
+								"src": "1562:7:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_uint256",
+									"typeString": "uint256"
+								}
+							},
+							"value": {
+								"hexValue": "3234",
+								"id": 126,
+								"isConstant": false,
+								"isLValue": false,
+								"isPure": true,
+								"kind": "number",
+								"lValueRequested": false,
+								"nodeType": "Literal",
+								"src": "1591:2:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_rational_24_by_1",
+									"typeString": "int_const 24"
+								},
+								"value": "24"
+							},
+							"visibility": "internal"
+						}
+					],
+					"src": "32:1562:0"
+				},
+				"id": 0
+			}
+		}
+	}
+}

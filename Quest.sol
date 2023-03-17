@@ -35,15 +35,19 @@ contract Quest is Ownable, ReentrancyGuard {
     constructor(Players _nftCollection) {
         nftCollection = _nftCollection;
 
-        miningQuests[COPPER] = QuestDetail("COPPER", 1, 5, COPPER_ORE);
-        miningQuests[TIN] = QuestDetail("TIN", 1, 5, TIN_ORE);
-        miningQuests[IRON] = QuestDetail("IRON", 10, 20, IRON_ORE);
-        miningQuests[RUNE] = QuestDetail("RUNE", 40, 200, RUNE_ORE);
-        miningQuests[CANTO] = QuestDetail("CANTO", 99, 400, CANTO_ORE);
+        miningQuests[BRONZE] = QuestDetail("BRONZE ORE", 1, 5, BRONZE_ORE);
+        miningQuests[IRON] = QuestDetail("IRON ORE", 10, 20, IRON_ORE);
+        miningQuests[RUNE] = QuestDetail("RUNE ORE", 40, 200, RUNE_ORE);
+        miningQuests[CANTO] = QuestDetail("CANTO ORE", 99, 400, CANTO_ORE);
 
         fishingQuests[SHRIMP] = QuestDetail("SHRIMP", 1, 5, RAW_SHRIMP);
         fishingQuests[LOBSTER] = QuestDetail("LOBSTER", 40, 200, RAW_LOBSTER);
         fishingQuests[SHARK] = QuestDetail("SHARK", 70, 400, RAW_SHARK);
+
+        smithingQuests[BRONZE] = QuestDetail("BRONZE BAR", 1, 5, BRONZE_BAR);
+        smithingQuests[IRON] = QuestDetail("IRON BAR", 10, 20, IRON_BAR);
+        smithingQuests[RUNE] = QuestDetail("RUNE BAR", 40, 200, RUNE_BAR);
+        smithingQuests[CANTO] = QuestDetail("CANTO BAR", 99, 400, CANTO_BAR);
 
         combatQuests[CHICKEN] = QuestDetail("CHICKEN", 1, 5, 0);
         combatQuests[GOBLIN] = QuestDetail("GOBLIN", 5, 25, 0);
@@ -77,14 +81,9 @@ contract Quest is Ownable, ReentrancyGuard {
         nftCollection.transferFrom(msg.sender, address(this), _tokenId);
     }
 
-    function smithOre(uint256 _playerId, uint256 _itemId, uint256 _amount) external {
-        uint256 xp = _amount * miningQuests[_itemId].xp;
-        nftCollection.smithOre(_playerId, _itemId, _amount, xp);
-    }
-
-    function craftItems(uint256 _playerId, uint256 _itemId, uint256 _amount) external {
-        uint256 xp = _amount * miningQuests[_itemId].xp;
-        nftCollection.smithOre(_playerId, _itemId, _amount, xp);
+    function craft(uint256 _playerId, uint256 _itemId, uint256 _amount) external {
+        uint256 xp = _amount * smithingQuests[_itemId].xp;
+        nftCollection.craft(_playerId, _itemId, _amount, xp);
     }
 
     function checkLevel(uint256 _tokenId, uint256 _questType, uint256 _questDetail) internal view {
@@ -128,14 +127,12 @@ contract Quest is Ownable, ReentrancyGuard {
             require(questingPlayers[_tokenIds[i]].owner == msg.sender);
 
             // Calc amount, rewards
-
             uint256 xpEarned;
             uint256 itemAmount;
             uint256 itemId = questDetail.itemId;
 
             (xpEarned, itemAmount) = getRewards(_tokenIds[i]);
 
-            // TODO
             nftCollection.rewards(_tokenIds[i], playerQuest.owner, playerQuest.questType, xpEarned*questDetail.xp , itemId, itemAmount);
 
             playerQuest.isQuesting = false;
