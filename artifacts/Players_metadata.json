@@ -164,12 +164,22 @@
 				"inputs": [
 					{
 						"internalType": "uint256",
+						"name": "_playerId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
 						"name": "_itemId",
 						"type": "uint256"
 					},
 					{
 						"internalType": "uint256",
 						"name": "_amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "xp",
 						"type": "uint256"
 					}
 				],
@@ -545,17 +555,9 @@
 				"inputs": [
 					{
 						"internalType": "uint256",
-						"name": "_rewardsMultipler",
+						"name": "_playerId",
 						"type": "uint256"
-					}
-				],
-				"name": "setRewards",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
+					},
 					{
 						"internalType": "uint256",
 						"name": "_itemId",
@@ -564,6 +566,11 @@
 					{
 						"internalType": "uint256",
 						"name": "_amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "xp",
 						"type": "uint256"
 					}
 				],
@@ -933,11 +940,11 @@
 			]
 		},
 		"CantoScapeLib.sol": {
-			"keccak256": "0x2fb14a7b4531bf9b6498440e0fd03b828ad181065a2e23dd62b8971ee6a47af0",
+			"keccak256": "0x5ba0e6fca13f1402a985c5b543c2e8a4f093ff05da5c13585ae9e34db8e225d8",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://13627647e5d98e176227f04155cad53fa6a34e004560ffec98dd0817fa0b6427",
-				"dweb:/ipfs/QmYcmHqaow5j2KfLVfScRhkBtUdavtYTa8F5FUmMhz3TzT"
+				"bzz-raw://cd473d9d18fbe5a3d0983064c1f00314d036c0320cbd4555fec05de549cd6826",
+				"dweb:/ipfs/QmNe2eCwQ6uH9ZWXaGPdM2Enuk6Nhq1jmH1nwT45TRZst3"
 			]
 		},
 		"Items.sol": {
@@ -949,11 +956,11 @@
 			]
 		},
 		"Players.sol": {
-			"keccak256": "0x51451f5e925b5ba8348402d3ebb4b9e8aca11f4521bdd6bc87a1f5f8e7244a4c",
+			"keccak256": "0x144f3e854a834f475901f8073f5a4da0009da9b0f36e03782337fb8cdef5db1e",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://e11393647d0862febf5707ce856c4ffefa35c22042098624856f03d96dcfe717",
-				"dweb:/ipfs/QmdZfN5184ZLsc6hPnb1Zcp4Dj6WH2zvYfSVeJPeoExS9r"
+				"bzz-raw://e6dcfaf894dd1c8b2cb3565a540e33c06bb355f6feee462c71cf945efc471583",
+				"dweb:/ipfs/QmYofxDdjDJNJXsyXFv3Gba4eDQiG7vi5ywb6WyLsnrf5V"
 			]
 		}
 	},

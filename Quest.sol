@@ -21,6 +21,7 @@ contract Quest is Ownable, ReentrancyGuard {
         string name;
         uint256 lvl;
         uint256 xp;
+        uint256 itemId;
     }
 
     mapping(uint256 => uint256[]) public drops;
@@ -29,28 +30,35 @@ contract Quest is Ownable, ReentrancyGuard {
     mapping(uint256 => QuestDetail) public combatQuests;
     mapping(uint256 => QuestDetail) public fishingQuests;
     mapping(uint256 => QuestDetail) public miningQuests;
+    mapping(uint256 => QuestDetail) public smithingQuests;
 
     constructor(Players _nftCollection) {
         nftCollection = _nftCollection;
 
-        miningQuests[COPPER] = QuestDetail("COPPER", 1, 5);
-        miningQuests[TIN] = QuestDetail("TIN", 1, 5);
-        miningQuests[IRON] = QuestDetail("IRON", 10, 20);
-        miningQuests[RUNE] = QuestDetail("RUNE", 40, 200);
-        miningQuests[CANTO] = QuestDetail("CANTO", 99, 400);
+        miningQuests[COPPER] = QuestDetail("COPPER", 1, 5, COPPER_ORE);
+        miningQuests[TIN] = QuestDetail("TIN", 1, 5, TIN_ORE);
+        miningQuests[IRON] = QuestDetail("IRON", 10, 20, IRON_ORE);
+        miningQuests[RUNE] = QuestDetail("RUNE", 40, 200, RUNE_ORE);
+        miningQuests[CANTO] = QuestDetail("CANTO", 99, 400, CANTO_ORE);
 
-        fishingQuests[SHRIMP] = QuestDetail("SHRIMP", 1, 5);
-        fishingQuests[LOBSTER] = QuestDetail("LOBSTER", 40, 200);
-        fishingQuests[SHARK] = QuestDetail("SHARK", 70, 400);
+        fishingQuests[SHRIMP] = QuestDetail("SHRIMP", 1, 5, RAW_SHRIMP);
+        fishingQuests[LOBSTER] = QuestDetail("LOBSTER", 40, 200, RAW_LOBSTER);
+        fishingQuests[SHARK] = QuestDetail("SHARK", 70, 400, RAW_SHARK);
 
-        combatQuests[CHICKEN] = QuestDetail("CHICKEN", 1, 5);
-        combatQuests[GOBLIN] = QuestDetail("GOBLIN", 5, 25);
-        combatQuests[WARRIOR] = QuestDetail("WARRIOR", 10, 50);
-        combatQuests[BARBARIAN] = QuestDetail("BARBARIAN", 20, 75);
-        combatQuests[HILL_GIANT] = QuestDetail("HILL_GIANT", 30, 100);
-        combatQuests[MOSS_GIANT] = QuestDetail("MOSS_GIANT", 40, 125);
-        combatQuests[LESSER_DEMON] = QuestDetail("LESSER_DEMON", 50, 200);
-        combatQuests[GREATER_DEMON] = QuestDetail("GREATER_DEMON", 60, 400);
+        combatQuests[CHICKEN] = QuestDetail("CHICKEN", 1, 5, 0);
+        combatQuests[GOBLIN] = QuestDetail("GOBLIN", 5, 25, 0);
+        combatQuests[WARRIOR] = QuestDetail("WARRIOR", 10, 50, 0);
+        combatQuests[BARBARIAN] = QuestDetail("BARBARIAN", 20, 75, 0);
+        combatQuests[HILL_GIANT] = QuestDetail("HILL_GIANT", 30, 100, 0);
+        combatQuests[MOSS_GIANT] = QuestDetail("MOSS_GIANT", 40, 125, 0);
+        combatQuests[LESSER_DEMON] = QuestDetail("LESSER_DEMON", 50, 200, 0);
+        combatQuests[GREATER_DEMON] = QuestDetail("GREATER_DEMON", 60, 400, 0);
+    }
+
+    uint256 rewardsMultipler = 1;
+
+    function setRewards(uint256 _rewardsMultipler) public onlyOwner {
+        rewardsMultipler = _rewardsMultipler;
     }
 
     function quest(uint256 _tokenId, uint256 _questType, uint256 _questDetail) external  {
@@ -69,23 +77,39 @@ contract Quest is Ownable, ReentrancyGuard {
         nftCollection.transferFrom(msg.sender, address(this), _tokenId);
     }
 
+    function smithOre(uint256 _playerId, uint256 _itemId, uint256 _amount) external {
+        uint256 xp = _amount * miningQuests[_itemId].xp;
+        nftCollection.smithOre(_playerId, _itemId, _amount, xp);
+    }
+
+    function craftItems(uint256 _playerId, uint256 _itemId, uint256 _amount) external {
+        uint256 xp = _amount * miningQuests[_itemId].xp;
+        nftCollection.smithOre(_playerId, _itemId, _amount, xp);
+    }
+
     function checkLevel(uint256 _tokenId, uint256 _questType, uint256 _questDetail) internal view {
         if (_questType == FISHING) {
             uint256 lvl = fishingQuests[_questDetail].lvl;
             uint256 fishingLevel = nftCollection.getFishingLevel(_tokenId);
-            require (fishingLevel > lvl, "Level too low");
+            require (fishingLevel >= lvl, "Level too low");
         }
         if (_questType == MINING) {
             // Make function for get mining level
             uint256 lvl = miningQuests[_questDetail].lvl;
             uint256 fishingLevel = nftCollection.getMiningLevel(_tokenId);
-            require (fishingLevel > lvl, "Level too low");
+            require (fishingLevel >= lvl, "Level too low");
         }
         if (_questType == COMBAT) {
             // Make getter
             uint256 lvl = combatQuests[_questDetail].lvl;
             uint256 fishingLevel = nftCollection.getFishingLevel(_tokenId);
-            require (fishingLevel > lvl, "Level too low");
+            require (fishingLevel >= lvl, "Level too low");
+        }
+        if (_questType == SMITHING) {
+            // Make getter
+            uint256 lvl = smithingQuests[_questDetail].lvl;
+            uint256 fishingLevel = nftCollection.getSmithingLevel(_tokenId);
+            require (fishingLevel >= lvl, "Level too low");
         }
     }
 
@@ -103,8 +127,16 @@ contract Quest is Ownable, ReentrancyGuard {
 
             require(questingPlayers[_tokenIds[i]].owner == msg.sender);
 
+            // Calc amount, rewards
+
+            uint256 xpEarned;
+            uint256 itemAmount;
+            uint256 itemId = questDetail.itemId;
+
+            (xpEarned, itemAmount) = getRewards(_tokenIds[i]);
+
             // TODO
-            nftCollection.rewards(_tokenIds[i],playerQuest.time, playerQuest.owner, playerQuest.questType, questDetail.xp);
+            nftCollection.rewards(_tokenIds[i], playerQuest.owner, playerQuest.questType, xpEarned*questDetail.xp , itemId, itemAmount);
 
             playerQuest.isQuesting = false;
 
@@ -112,8 +144,13 @@ contract Quest is Ownable, ReentrancyGuard {
         }
     }
 
-    function checkRewards() internal {
+    uint256 xpDenom = 150;
 
+    function getRewards(uint256 _playerId) internal view returns (uint256 xp, uint256 amount) {
+        PlayerQuesting storage playerQuest = questingPlayers[_playerId];
+        uint256 timeDifference = (block.timestamp - playerQuest.time) * rewardsMultipler;
+        amount = timeDifference / xpDenom;
+        return (amount, amount);
     }
 
 }

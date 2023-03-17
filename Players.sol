@@ -56,8 +56,6 @@ contract Players is ERC721, ERC721Burnable, Ownable, ERC721Holder {
         uint256 ring;
     }
 
-    uint256 rewardsMultipler = 1;
-
     Player[] players;
     PlayerEquipment[] playerEquipments;
 
@@ -191,15 +189,16 @@ contract Players is ERC721, ERC721Burnable, Ownable, ERC721Holder {
         Player storage player = players[_playerId];
         return player.miningLevel;
     }
+    function getSmithingLevel(uint256 _playerId) public view returns (uint256) {
+        Player storage player = players[_playerId];
+        return player.smithingLevel;
+    }
 
     function setQuestContract(address _questContract) public onlyOwner {
         questContract = _questContract;
     }
 
-    function setRewards(uint256 _rewardsMultipler) public onlyOwner {
-        rewardsMultipler = _rewardsMultipler;
-    }
-
+    // Set cap at 99
     function levelUp(uint256 _playerId, uint256 _questType) internal {
         if (_questType == FISHING) {
             Player storage player = players[_playerId];
@@ -218,7 +217,7 @@ contract Players is ERC721, ERC721Burnable, Ownable, ERC721Holder {
         Player storage player = players[_playerId];
 
         if (_questType == FISHING) {
-            player.currentFishingXp += _xp * rewardsMultipler;
+            player.currentFishingXp += _xp;
             items.mint(_playerAddress, _itemId, _amount, "");
             if (player.currentFishingXp >= xpForLevel[player.fishingLevel]) {
                 while(player.currentFishingXp >= xpForLevel[player.fishingLevel]) {
@@ -226,36 +225,50 @@ contract Players is ERC721, ERC721Burnable, Ownable, ERC721Holder {
                 }
             }
         } else if (_questType == MINING) {
-            player.currentMiningXp += _xp * rewardsMultipler;
+            player.currentMiningXp += _xp;
             items.mint(_playerAddress, _itemId, _amount, "");
             if (player.currentMiningXp >= xpForLevel[player.miningLevel]) {
                 while(player.currentMiningXp >= xpForLevel[player.miningLevel]) {
-                    levelUp(_playerId, _questType);
+                    levelUp(_playerId, SMITHING);
                 }
             }
         }
     }
 
     // TODO: Smithing XP
-    function craftItems(uint256 _itemId, uint256 _amount)  public {
+    function craftItems(uint256 _playerId, uint256 _itemId, uint256 _amount, uint256 xp) public {
+        require (msg.sender == questContract, "403");
+        Player storage player = players[_playerId];
+        player.currentSmithingXp += xp;
+        if (player.currentSmithingXp >= xpForLevel[player.smithingLevel]) {
+            while(player.currentSmithingXp >= xpForLevel[player.smithingLevel]) {
+                levelUp(_playerId, SMITHING);
+            }
+        }
         if (_itemId == BRONZE_FULL_HELM) {
             require(items.balanceOf(msg.sender, BRONZE_BAR) >= 2 * _amount, "Missing Required materials");
-            // Burn here
-         //   safeTransferFrom(msg.sender, address(this), BRONZE_BAR, 2 * _amount, "");
+
             items.burn(msg.sender, BRONZE_BAR, 2 * _amount);
             items.mint(msg.sender, BRONZE_FULL_HELM, _amount, "");
         }        
     }
 
     // TODO: Smithing XP
-    function smithOre(uint256 _itemId, uint256 _amount) public {
+    function smithOre(uint256 _playerId, uint256 _itemId, uint256 _amount, uint256 xp) public {
+        require (msg.sender == questContract, "403");
+        Player storage player = players[_playerId];
+        player.currentMiningXp += xp;
+        if (player.currentSmithingXp >= xpForLevel[player.smithingLevel]) {
+            while(player.currentSmithingXp >= xpForLevel[player.smithingLevel]) {
+                levelUp(_playerId, SMITHING);
+            }
+        }
+        // Probably should be a datatype instead of if statements
         if (_itemId == BRONZE_BAR) {
             require(items.balanceOf(msg.sender, TIN_ORE) > _amount && items.balanceOf(msg.sender, COPPER_ORE) > _amount, "Missing Required materials");
             // BURN
-         //   safeTransferFrom(msg.sender, address(this), TIN_ORE, _amount, "");
             items.burn(msg.sender, TIN_ORE, _amount);
             items.burn(msg.sender, COPPER_ORE, _amount);
-          //  safeTransferFrom(msg.sender, address(this), COPPER_ORE, _amount, "");
             items.mint(msg.sender, BRONZE_BAR, _amount, "");
         }
     }

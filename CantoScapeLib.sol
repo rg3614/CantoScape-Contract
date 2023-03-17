@@ -5,6 +5,7 @@ pragma solidity ^0.8.9;
 uint256 constant FISHING = 1;
 uint256 constant MINING = 2;
 uint256 constant COMBAT = 3;
+uint256 constant SMITHING = 4;
 
 // Fishing Types
 uint256 constant SHRIMP = 1;
@@ -28,6 +29,8 @@ uint256 constant MOSS_GIANT = 6;
 uint256 constant LESSER_DEMON = 7;
 uint256 constant GREATER_DEMON = 8;
 
+
+// Item Types
 uint256 constant BRONZE_PICKAXE = 1;
 uint256 constant IRON_PICKAXE = 2;
 uint256 constant RUNE_PICKAXE = 3;

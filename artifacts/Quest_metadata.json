@@ -59,9 +59,32 @@
 						"internalType": "uint256",
 						"name": "xp",
 						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "itemId",
+						"type": "uint256"
 					}
 				],
 				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_itemId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_amount",
+						"type": "uint256"
+					}
+				],
+				"name": "craftItems",
+				"outputs": [],
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -112,6 +135,11 @@
 						"internalType": "uint256",
 						"name": "xp",
 						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "itemId",
+						"type": "uint256"
 					}
 				],
 				"stateMutability": "view",
@@ -140,6 +168,11 @@
 					{
 						"internalType": "uint256",
 						"name": "xp",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "itemId",
 						"type": "uint256"
 					}
 				],
@@ -242,6 +275,37 @@
 			{
 				"inputs": [],
 				"name": "renounceOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_rewardsMultipler",
+						"type": "uint256"
+					}
+				],
+				"name": "setRewards",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_itemId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_amount",
+						"type": "uint256"
+					}
+				],
+				"name": "smithOre",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -479,11 +543,11 @@
 			]
 		},
 		"CantoScapeLib.sol": {
-			"keccak256": "0x2fb14a7b4531bf9b6498440e0fd03b828ad181065a2e23dd62b8971ee6a47af0",
+			"keccak256": "0x5ba0e6fca13f1402a985c5b543c2e8a4f093ff05da5c13585ae9e34db8e225d8",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://13627647e5d98e176227f04155cad53fa6a34e004560ffec98dd0817fa0b6427",
-				"dweb:/ipfs/QmYcmHqaow5j2KfLVfScRhkBtUdavtYTa8F5FUmMhz3TzT"
+				"bzz-raw://cd473d9d18fbe5a3d0983064c1f00314d036c0320cbd4555fec05de549cd6826",
+				"dweb:/ipfs/QmNe2eCwQ6uH9ZWXaGPdM2Enuk6Nhq1jmH1nwT45TRZst3"
 			]
 		},
 		"Items.sol": {
@@ -495,19 +559,19 @@
 			]
 		},
 		"Players.sol": {
-			"keccak256": "0x91b10d3e06c571586016a466e3b216972efb655c504b4a6222033b5520b4b036",
+			"keccak256": "0xb2b43b0e11049e3d508b5bb525be3ab1aab3116112388b3b098713c146b65493",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://1a3e4437c936a6e744bc5e0d62b660398750963d0c9cebcb687a0dcf788d271c",
-				"dweb:/ipfs/QmV96k7ZftxhL8BQVWVpt1zvzKsvdgJXurN9r21Ue9LpSb"
+				"bzz-raw://ed8c973962d537d2cd12e314fafc08b78c48fae27a63583d16dd37115b2515a5",
+				"dweb:/ipfs/QmdLSFPP4fpP4tZkzFNPdwkubyPypYapcpNLvf4eMfvupy"
 			]
 		},
 		"Quest.sol": {
-			"keccak256": "0xcb22f3096abdbf297fdda318f51c701ed81be6196685a82ac35eccbc1a16a2c6",
+			"keccak256": "0x9ca5332cbc25361f284f24b4072a3f87959ed17e02b8c9be509c4d3b3a101596",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://5aab2decfbeae2b28bdf982461c077b7f86760b5cfb42b1e2993fae1140da7a3",
-				"dweb:/ipfs/QmUNdUtG3Q1PLkmXmFaR3Hi4YarcaxS98HAr3DA5LPbsxd"
+				"bzz-raw://bdd0fab54f30a8e3608a40f235ae2a134d660b729f85ecc82369b25f7755d870",
+				"dweb:/ipfs/QmcpnfSr8BoCktZ8VnqM9JUeJzZnsZY7Em9vk6y2Mmnnyo"
 			]
 		}
 	},

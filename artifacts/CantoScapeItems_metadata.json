@@ -722,11 +722,11 @@
 			]
 		},
 		"CantoScapeLib.sol": {
-			"keccak256": "0x2fb14a7b4531bf9b6498440e0fd03b828ad181065a2e23dd62b8971ee6a47af0",
+			"keccak256": "0x2868f81f87cb0038570a6ee33a0a64e5f47b6939f98dc567c18c692bdf9715e6",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://13627647e5d98e176227f04155cad53fa6a34e004560ffec98dd0817fa0b6427",
-				"dweb:/ipfs/QmYcmHqaow5j2KfLVfScRhkBtUdavtYTa8F5FUmMhz3TzT"
+				"bzz-raw://2b22fb28f42ec6f22566f2c3330df100321e44451b8060d73f58071e0be3a52a",
+				"dweb:/ipfs/QmaocwCXuMwkrn5crKzmCqCGx6F8nAroxHUx8rHRZUSUXo"
 			]
 		},
 		"Items.sol": {
