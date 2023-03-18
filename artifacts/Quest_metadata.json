@@ -87,7 +87,7 @@
 						"type": "uint256"
 					}
 				],
-				"name": "craftItems",
+				"name": "craft",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -293,29 +293,6 @@
 					}
 				],
 				"name": "setRewards",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "_playerId",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "_itemId",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "_amount",
-						"type": "uint256"
-					}
-				],
-				"name": "smithOre",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -587,35 +564,35 @@
 			]
 		},
 		"CantoScapeLib.sol": {
-			"keccak256": "0x2868f81f87cb0038570a6ee33a0a64e5f47b6939f98dc567c18c692bdf9715e6",
+			"keccak256": "0x7df535066be08174d2b8eb48e22418144b3255455046334a2c33fd7fc92605ef",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://2b22fb28f42ec6f22566f2c3330df100321e44451b8060d73f58071e0be3a52a",
-				"dweb:/ipfs/QmaocwCXuMwkrn5crKzmCqCGx6F8nAroxHUx8rHRZUSUXo"
+				"bzz-raw://a15b73fb2bec3e04a590aba86924712715d76de011655c2b1b0d5dac8e8a1701",
+				"dweb:/ipfs/QmcxkQAjVJe8pQ7mofMvtPduSczANAJ5yLbHin1oMc2Aqs"
 			]
 		},
 		"Items.sol": {
-			"keccak256": "0xd321b91faeb31f418a4edb0ca07c7beba5fc39f13896955ed31c34fbca07cc58",
+			"keccak256": "0xb52d482399e9dd981cd445538549d10f66f9b55b992ec23b45b28a739e72b828",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://76a46f86155ab39338fa496de698871806df391b65b155b3756440d010315825",
-				"dweb:/ipfs/QmbKzb5LpCgxG66H7HkP37RwN7HVTbt2o7fkQPNXY7S7nm"
+				"bzz-raw://9a32e72d3291d01f29e61e1ee1ef0e67d36017c5f17098bed54751c7dfe3e9b2",
+				"dweb:/ipfs/QmVXGFSYnB9QtvLB8ao2e3yz2SSYUJG1JYpaJznNFTWRoj"
 			]
 		},
 		"Players.sol": {
-			"keccak256": "0x987b61c3930ab6dd08b36ff4f268d5402f826d5ef913e9f611d8d2439eb89b52",
+			"keccak256": "0x6d80b65367b56ab8f426a2afe5a5c2bb1c6a28c4de4361d96738480fdfdf582a",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://2906efdcdaed999402705b9c8226ccef614cd5cf65eaed1b1a59628123e9ddb3",
-				"dweb:/ipfs/QmVqLWmPrwbcDBcoiBdpNNsS8aRUG78uUUWKLBZGCcKe1E"
+				"bzz-raw://aa3128ce683b20f7a7b03cfe7d0d58114a485a9c0dc8f63a36dfbe6ec908ff16",
+				"dweb:/ipfs/QmZfnnEufKudhC4MQELD64pxozMEpdfPmZ75RHgD7VUorq"
 			]
 		},
 		"Quest.sol": {
-			"keccak256": "0x7577d8ff71f2d46bd1c8d43186e09c4a12e0ae63295f9372e59580e79feeeb55",
+			"keccak256": "0x30add7c439b969cb31cc0904778c623359f50a20788bba87ee975ebb05203b7f",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://5d8fd22346ee72536d942e1167fcdd565d1262fb8d99faaf82a63c00a380cfd2",
-				"dweb:/ipfs/QmSPszUGdcNy1eSe9i68xor6UMNYW5k1poFmqyizbdxUaQ"
+				"bzz-raw://0a452473bd76c6dd52d274a56af2b29525aeac72ac2769070db6d21e06221f50",
+				"dweb:/ipfs/QmVDmqGrynCgxY4R12UzciyfFwQ19hcFa3EkTfoVDGEARZ"
 			]
 		}
 	},

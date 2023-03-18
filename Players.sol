@@ -208,6 +208,10 @@ contract Players is ERC721, ERC721Burnable, Ownable, ERC721Holder {
             Player storage player = players[_playerId];
             player.currentMiningXp = player.currentMiningXp - xpForLevel[player.miningLevel];
             player.miningLevel += 1;
+        } else if (_questType == SMITHING) {
+            Player storage player = players[_playerId];
+            player.currentSmithingXp = player.currentSmithingXp - xpForLevel[player.smithingLevel];
+            player.smithingLevel += 1;
         }
     }
 
@@ -272,7 +276,7 @@ contract Players is ERC721, ERC721Burnable, Ownable, ERC721Holder {
         (, itemReq, amount) = items.CraftingRecipes(_itemId);
         require(items.balanceOf(_sender, itemReq) > amount * _amount, "Missing Required materials");
         items.burn(_sender, itemReq, amount * _amount);
-        items.mint(_sender, _itemId, amount * _amount, "");
+        items.mint(_sender, _itemId, _amount, "");
     }
 
     function _baseURI() internal pure override returns (string memory) {

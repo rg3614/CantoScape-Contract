@@ -83,7 +83,7 @@ contract Quest is Ownable, ReentrancyGuard {
 
     function craft(uint256 _playerId, uint256 _itemId, uint256 _amount) external {
         uint256 xp = _amount * smithingQuests[_itemId].xp;
-        nftCollection.craft(_playerId, _itemId, _amount, xp);
+        nftCollection.craft(_playerId, _itemId, _amount, xp, msg.sender);
     }
 
     function checkLevel(uint256 _tokenId, uint256 _questType, uint256 _questDetail) internal view {
