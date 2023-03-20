@@ -24,10 +24,20 @@ contract Quest is Ownable, ReentrancyGuard {
         uint256 itemId;
     }
 
+    struct Monster {
+        string name;
+        uint8 attackLevel;
+        uint8 strengthLevel;
+        uint8 defenseLevel;
+        uint8 hitpointsLevel;
+        uint256 xp;
+        uint8[] drops;
+    }
+
     mapping(uint256 => uint256[]) public drops;
     mapping(uint256 => PlayerQuesting) public questingPlayers;
 
-    mapping(uint256 => QuestDetail) public combatQuests;
+    mapping(uint256 => Monster) public combatQuests;
     mapping(uint256 => QuestDetail) public fishingQuests;
     mapping(uint256 => QuestDetail) public miningQuests;
     mapping(uint256 => QuestDetail) public smithingQuests;
@@ -49,14 +59,16 @@ contract Quest is Ownable, ReentrancyGuard {
         smithingQuests[RUNE] = QuestDetail("RUNE BAR", 40, 200, RUNE_BAR);
         smithingQuests[CANTO] = QuestDetail("CANTO BAR", 99, 400, CANTO_BAR);
 
-        combatQuests[CHICKEN] = QuestDetail("CHICKEN", 1, 5, 0);
-        combatQuests[GOBLIN] = QuestDetail("GOBLIN", 5, 25, 0);
-        combatQuests[WARRIOR] = QuestDetail("WARRIOR", 10, 50, 0);
-        combatQuests[BARBARIAN] = QuestDetail("BARBARIAN", 20, 75, 0);
-        combatQuests[HILL_GIANT] = QuestDetail("HILL_GIANT", 30, 100, 0);
-        combatQuests[MOSS_GIANT] = QuestDetail("MOSS_GIANT", 40, 125, 0);
-        combatQuests[LESSER_DEMON] = QuestDetail("LESSER_DEMON", 50, 200, 0);
-        combatQuests[GREATER_DEMON] = QuestDetail("GREATER_DEMON", 60, 400, 0);
+        uint8[] memory t = new uint8[](1);
+//        t[0] = 0;
+        combatQuests[CHICKEN] = Monster("CHICKEN", 1, 1, 1, 10, 5, t);
+        // combatQuests[GOBLIN] = QuestDetail("GOBLIN", 5, 25, 0);
+        // combatQuests[WARRIOR] = QuestDetail("WARRIOR", 10, 50, 0);
+        // combatQuests[BARBARIAN] = QuestDetail("BARBARIAN", 20, 75, 0);
+        // combatQuests[HILL_GIANT] = QuestDetail("HILL_GIANT", 30, 100, 0);
+        // combatQuests[MOSS_GIANT] = QuestDetail("MOSS_GIANT", 40, 125, 0);
+        // combatQuests[LESSER_DEMON] = QuestDetail("LESSER_DEMON", 50, 200, 0);
+        // combatQuests[GREATER_DEMON] = QuestDetail("GREATER_DEMON", 60, 400, 0);
     }
 
     uint256 rewardsMultipler = 1;
@@ -98,12 +110,6 @@ contract Quest is Ownable, ReentrancyGuard {
             uint256 fishingLevel = nftCollection.getMiningLevel(_tokenId);
             require (fishingLevel >= lvl, "Level too low");
         }
-        if (_questType == COMBAT) {
-            // Make getter
-            uint256 lvl = combatQuests[_questDetail].lvl;
-            uint256 fishingLevel = nftCollection.getFishingLevel(_tokenId);
-            require (fishingLevel >= lvl, "Level too low");
-        }
         if (_questType == SMITHING) {
             // Make getter
             uint256 lvl = smithingQuests[_questDetail].lvl;
@@ -112,29 +118,53 @@ contract Quest is Ownable, ReentrancyGuard {
         }
     }
 
+    function calculateMaxHit(uint effectiveStrengthLevel, uint bonus, uint defenseLevel, uint defenseBonus) public pure returns (uint) {
+        uint denominator = 640 + (defenseLevel / 10) + defenseBonus;
+        uint maxHit = (effectiveStrengthLevel * (bonus + 64)) / denominator;
+        return maxHit;
+    }
+
+    function getCombatComparsion(uint256 _monsterId, uint256 _playerId) public returns(uint256 h1, uint256 h2) {
+        Monster storage m = combatQuests[_monsterId];
+        uint256 attackBonus;
+        uint256 defenseBonus;
+
+        (attackBonus,attackBonus) = nftCollection.getCombatBonus(_playerId);
+
+        uint256 attackLevel;
+        uint256 strengthLevel;
+        uint256 defenseLevel;
+        (attackLevel,strengthLevel,defenseLevel) = nftCollection.getCombatStats(_playerId);
+
+        h1 = calculateMaxHit(strengthLevel, attackBonus, m.defenseLevel, 0);
+        h2 = calculateMaxHit(m.strengthLevel, 0, defenseLevel, defenseBonus);
+    }
+
     function withdraw(uint256[] calldata _tokenIds) external nonReentrant {
         uint256 lenToWithdraw = _tokenIds.length;
         for (uint256 i; i < lenToWithdraw; ++i) {
             PlayerQuesting storage playerQuest = questingPlayers[_tokenIds[i]];
-            QuestDetail storage questDetail = fishingQuests[playerQuest.questDetail];
+            if (playerQuest.questType == COMBAT) {
+                
+                
+            } else {
+                QuestDetail storage questDetail = fishingQuests[playerQuest.questDetail];
 
-            if (playerQuest.questType == MINING) {
-                questDetail = miningQuests[playerQuest.questDetail];
-            } else if (playerQuest.questType == COMBAT) {
-                questDetail = combatQuests[playerQuest.questDetail];
+                if (playerQuest.questType == MINING) {
+                    questDetail = miningQuests[playerQuest.questDetail];
+                } 
+
+                require(questingPlayers[_tokenIds[i]].owner == msg.sender);
+
+                // Calc amount, rewards
+                uint256 xpEarned;
+                uint256 itemAmount;
+                uint256 itemId = questDetail.itemId;
+
+                (xpEarned, itemAmount) = getRewards(_tokenIds[i]);
+
+                nftCollection.rewards(_tokenIds[i], playerQuest.owner, playerQuest.questType, xpEarned*questDetail.xp , itemId, itemAmount);
             }
-
-            require(questingPlayers[_tokenIds[i]].owner == msg.sender);
-
-            // Calc amount, rewards
-            uint256 xpEarned;
-            uint256 itemAmount;
-            uint256 itemId = questDetail.itemId;
-
-            (xpEarned, itemAmount) = getRewards(_tokenIds[i]);
-
-            nftCollection.rewards(_tokenIds[i], playerQuest.owner, playerQuest.questType, xpEarned*questDetail.xp , itemId, itemAmount);
-
             playerQuest.isQuesting = false;
 
             nftCollection.transferFrom(address(this), msg.sender, _tokenIds[i]);

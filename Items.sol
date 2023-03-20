@@ -11,7 +11,10 @@ import "./CantoScapeLib.sol";
 contract CantoScapeItems is ERC1155, Ownable, ERC1155Burnable, ERC1155Supply {
 
     struct equipmentBonuses {
-        uint256 attackBonus;
+        uint256 attAttackBonus;
+        uint256 attStrengthBonus;
+        uint256 defAttackBonus;
+        uint256 defStrengthBonus;
         uint256 defenseBonus;
     }
 
@@ -26,11 +29,11 @@ contract CantoScapeItems is ERC1155, Ownable, ERC1155Burnable, ERC1155Supply {
     mapping(uint256 => equipmentBonuses) public EquipmentBonuses;
 
     constructor() ERC1155("ENTER URL HERE") {
-        EquipmentBonuses[0] = equipmentBonuses(0,0);
-        EquipmentBonuses[BRONZE_FULL_HELM] = equipmentBonuses(0,2);
-        EquipmentBonuses[BRONZE_PLATEBODY] = equipmentBonuses(0,3);
-        EquipmentBonuses[BRONZE_PLATELEGS] = equipmentBonuses(0,4);
-        EquipmentBonuses[BRONZE_LONGSWORD] = equipmentBonuses(2,0);
+        EquipmentBonuses[0] = equipmentBonuses(0,0,0,0,0);
+        EquipmentBonuses[BRONZE_FULL_HELM] = equipmentBonuses(0,0,4,5,3);
+        EquipmentBonuses[BRONZE_PLATEBODY] = equipmentBonuses(0,0,15,14,9);
+        EquipmentBonuses[BRONZE_PLATELEGS] = equipmentBonuses(0,0,8,7,6);
+        EquipmentBonuses[BRONZE_LONGSWORD] = equipmentBonuses(4,5,0,0,0);
 
         // Amount maybe should be constants.
         CraftingRecipes[BRONZE_FULL_HELM] = craftingRecipes("BRONZE FULL HELM", BRONZE_BAR, 2);

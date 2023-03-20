@@ -31,29 +31,23 @@ contract Players is ERC721, ERC721Burnable, Ownable, ERC721Holder {
         uint8 cookingLevel;
         uint8 miningLevel;
         uint8 smithingLevel;
-        uint8 meleeLevel;
+        uint8 attackLevel;
+        uint8 strengthLevel;
+        uint8 defenseLevel;
         uint8 hitpointsLevel;
         uint256 currentFishingXp;
         uint256 currentCookingXp;
         uint256 currentMiningXp;
         uint256 currentSmithingXp;
-        uint256 currentMeleeXp;
+        uint256 currentAttackXp;
+        uint256 currentStrengthXp;
+        uint256 currentDefenseXp;
         uint256 currentHitpointsXp;
     }
 
     // 11 len
     struct PlayerEquipment {
-        uint256 head;
-        uint256 neck;
-        uint256 back;
-        uint256 ammo;
-        uint256 leftHand;
-        uint256 rightHand;
-        uint256 chest;
-        uint256 legs;
-        uint256 gloves;
-        uint256 boots;
-        uint256 ring;
+        uint256[11] equipment;
     }
 
     Player[] players;
@@ -77,104 +71,38 @@ contract Players is ERC721, ERC721Burnable, Ownable, ERC721Holder {
     }
 
     // Attack, Deffence
-    function getCombatBonus(uint256 _playerId) view public returns(uint256[2] memory bonuses) {
+    function getCombatBonus(uint256 _playerId) view public returns(uint256 attackBonus, uint256 defStrengthBonus) {
         PlayerEquipment storage playerEquipment = playerEquipments[_playerId];
         uint256 a;
+        uint256 s;
         uint256 d;
-        uint256 attackBonus;
-        uint256 defenseBonus;
-        (a,d) = readCombatBonuses(playerEquipment.head);
-        attackBonus += a;
-        defenseBonus += d;
-        (a,d) = readCombatBonuses(playerEquipment.neck);
-        attackBonus += a;
-        defenseBonus += d;
-        (a,d) = readCombatBonuses(playerEquipment.back);
-        attackBonus += a;
-        defenseBonus += d;
-        (a,d) = readCombatBonuses(playerEquipment.ammo);
-        attackBonus += a;
-        defenseBonus += d;
-        (a,d) = readCombatBonuses(playerEquipment.leftHand);
-        attackBonus += a;
-        defenseBonus += d;
-        (a,d) = readCombatBonuses(playerEquipment.rightHand);
-        attackBonus += a;
-        defenseBonus += d;
-        (a,d) = readCombatBonuses(playerEquipment.chest);
-        attackBonus += a;
-        defenseBonus += d;
-        (a,d) = readCombatBonuses(playerEquipment.legs);
-        attackBonus += a;
-        defenseBonus += d;
-        (a,d) = readCombatBonuses(playerEquipment.gloves);
-        attackBonus += a;
-        defenseBonus += d;
-        (a,d) = readCombatBonuses(playerEquipment.boots);
-        attackBonus += a;
-        defenseBonus += d;
-        (a,d) = readCombatBonuses(playerEquipment.ring);
-        attackBonus += a;
-        defenseBonus += d;
-        return [attackBonus, defenseBonus];
+
+        for (uint i = 0; i < 11; i++) {
+            (a, s, , d,) = readCombatBonuses(getEquipment(playerEquipment, i));
+            attackBonus += a + s;
+            defStrengthBonus += d;
+        }
+
+        return (attackBonus, defStrengthBonus);
     }
 
-    function readCombatBonuses(uint256 _id) view internal returns (uint256 attack, uint256 defense) {
+    function readCombatBonuses(uint256 _id) view internal returns (uint256 attAttackBonus,uint256 attStrengthBonus,uint256 defAttackBonus,uint256 defStrengthBonus,uint256 defenseBonus) {
         return items.EquipmentBonuses(_id);
+    }
+    function getEquipment(PlayerEquipment storage playerEquipment, uint i) internal view returns(uint256) {
+        return playerEquipment.equipment[i];
     }
 
     // TODO: Transfer items in/out
-    function equipItems(uint256 _playerId, uint256[] memory _items) public {
-        // Require length _items
-        uint256 head = _items[0];
-        uint256 neck = _items[1];
-        uint256 back = _items[2];
-        uint256 ammo = _items[3];
-        uint256 leftHand = _items[4];
-        uint256 rightHand = _items[5];
-        uint256 chest = _items[6];
-        uint256 legs = _items[7];
-        uint256 gloves = _items[8];
-        uint256 boots = _items[9];
-        uint256 ring = _items[10];
-
+    function equipItems(uint256 _playerId, uint256[11] memory _items) public {
         PlayerEquipment storage playerEquipment = playerEquipments[_playerId];
-        // 1000 = Keep current equipment
-        // Require certain level for equipment
-        if (head != 1000) {
-            playerEquipment.head = head;
-        }
-        if (back != 1000) {
-            playerEquipment.back = back;
-        }
-        if (neck != 1000) {
-            playerEquipment.neck = back;
-        }
-        if (ammo != 1000) {
-            playerEquipment.ammo = ammo;
-        }
-        if (leftHand != 1000) {
-            playerEquipment.leftHand = leftHand;
-        }
-        if (rightHand != 1000) {
-            playerEquipment.rightHand = rightHand;
-        }
-        if (chest != 1000) {
-            playerEquipment.chest = chest;
-        }
-        if (legs != 1000) {
-            playerEquipment.legs = legs;
-        }
-        if (gloves != 1000) {
-            playerEquipment.gloves = gloves;
-        }
-        if (boots != 1000) {
-            playerEquipment.boots = boots;
-        }
-        if (ring != 1000) {
-            playerEquipment.ring = ring;
+        for (uint i = 0; i < 11; i++) {
+            if (_items[i] != 1000) {
+               playerEquipment.equipment[i] = _items[i];
+            }
         }
     }
+    
 
     function getFishingXp(uint256 _playerId) public view returns (uint256) {
         Player storage player = players[_playerId];
@@ -192,6 +120,11 @@ contract Players is ERC721, ERC721Burnable, Ownable, ERC721Holder {
     function getSmithingLevel(uint256 _playerId) public view returns (uint256) {
         Player storage player = players[_playerId];
         return player.smithingLevel;
+    }
+
+    function getCombatStats(uint256 _playerId) public view returns (uint256,uint256,uint256) {
+        Player storage player = players[_playerId];
+        return (player.attackLevel,player.strengthLevel,player.defenseLevel);
     }
 
     function setQuestContract(address _questContract) public onlyOwner {
@@ -286,35 +219,30 @@ contract Players is ERC721, ERC721Burnable, Ownable, ERC721Holder {
     function createPlayer() public {
         
         uint256 tokenId = _tokenIdCounter.current();
-        Player memory player;
-        player.fishingLevel = 1;
-        player.cookingLevel = 1;
-        player.miningLevel = 1;
-        player.smithingLevel = 1;
-        player.meleeLevel = 1;
-        player.hitpointsLevel = 10;
-        player.currentFishingXp = 0;
-        player.currentCookingXp = 0;
-        player.currentMiningXp = 0;
-        player.currentSmithingXp = 0;
-        player.currentMeleeXp = 0;
-        player.currentHitpointsXp = 0;
-        players.push(player);
+        players.push(Player({
+            fishingLevel: 1,
+            cookingLevel: 1,
+            miningLevel: 1,
+            smithingLevel: 1,
+            strengthLevel: 50,
+            attackLevel: 1,
+            defenseLevel: 1,
+            hitpointsLevel: 10,
+            currentFishingXp: 0,
+            currentCookingXp: 0,
+            currentMiningXp: 0,
+            currentSmithingXp: 0,
+            currentAttackXp: 0,
+            currentStrengthXp: 0,
+            currentDefenseXp: 0,
+            currentHitpointsXp: 0
+        }));
 
-        PlayerEquipment memory playerEquipment;
-        playerEquipment.head = 0;
-        playerEquipment.neck = 0;
-        playerEquipment.back = 0;
-        playerEquipment.ammo = 0;
-        playerEquipment.leftHand = 0;
-        playerEquipment.rightHand = 0;
-        playerEquipment.chest = 0;
-        playerEquipment.legs = 0;
-        playerEquipment.gloves = 0;
-        playerEquipment.boots = 0;
-        playerEquipment.ring = 0;
+        PlayerEquipment memory newEquipment = PlayerEquipment({
+            equipment: [uint256(1000), 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000]
+        });
 
-        playerEquipments.push(playerEquipment);
+        playerEquipments.push(newEquipment);
 
         _tokenIdCounter.increment();
         _safeMint(msg.sender, tokenId);

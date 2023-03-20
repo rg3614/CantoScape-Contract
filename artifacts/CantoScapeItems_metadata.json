@@ -188,7 +188,22 @@
 				"outputs": [
 					{
 						"internalType": "uint256",
-						"name": "attackBonus",
+						"name": "attAttackBonus",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "attStrengthBonus",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "defAttackBonus",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "defStrengthBonus",
 						"type": "uint256"
 					},
 					{
@@ -759,11 +774,11 @@
 			]
 		},
 		"Items.sol": {
-			"keccak256": "0xb52d482399e9dd981cd445538549d10f66f9b55b992ec23b45b28a739e72b828",
+			"keccak256": "0x403748edb266079d5cac67e45469e605c990943347f68a347264bf2e850acc3a",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://9a32e72d3291d01f29e61e1ee1ef0e67d36017c5f17098bed54751c7dfe3e9b2",
-				"dweb:/ipfs/QmVXGFSYnB9QtvLB8ao2e3yz2SSYUJG1JYpaJznNFTWRoj"
+				"bzz-raw://c985dffe78cc6204c552a8cba0dd331fbd27d80f1d48103a70c75ffc400ea82b",
+				"dweb:/ipfs/QmSCZnmFyqtPp1EwFSDmN3vdoUBj4VUL7Qm8jHJUnLKkty"
 			]
 		}
 	},
