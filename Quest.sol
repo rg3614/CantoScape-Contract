@@ -119,8 +119,8 @@ contract Quest is Ownable, ReentrancyGuard {
     }
 
     function calculateMaxHit(uint effectiveStrengthLevel, uint bonus, uint defenseLevel, uint defenseBonus) public pure returns (uint) {
-        uint denominator = 640 + (defenseLevel / 10) + defenseBonus;
-        uint maxHit = (effectiveStrengthLevel * (bonus + 64)) / denominator;
+        uint denominator = defenseLevel + defenseBonus;
+        uint maxHit = (effectiveStrengthLevel * bonus) / denominator;
         return maxHit;
     }
 
