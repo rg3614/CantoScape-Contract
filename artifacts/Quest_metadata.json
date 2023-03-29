@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.18+commit.87f61d96"
+		"version": "0.8.19+commit.7dd6d404"
 	},
 	"language": "Solidity",
 	"output": {
@@ -39,6 +39,40 @@
 				"inputs": [
 					{
 						"internalType": "uint256",
+						"name": "effectiveStrengthLevel",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "bonus",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "defenseLevel",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "defenseBonus",
+						"type": "uint256"
+					}
+				],
+				"name": "calculateMaxHit",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "pure",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
 						"name": "",
 						"type": "uint256"
 					}
@@ -51,18 +85,28 @@
 						"type": "string"
 					},
 					{
-						"internalType": "uint256",
-						"name": "lvl",
-						"type": "uint256"
+						"internalType": "uint8",
+						"name": "attackLevel",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "strengthLevel",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "defenseLevel",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "hitpointsLevel",
+						"type": "uint8"
 					},
 					{
 						"internalType": "uint256",
 						"name": "xp",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "itemId",
 						"type": "uint256"
 					}
 				],
@@ -148,6 +192,35 @@
 					}
 				],
 				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_monsterId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_playerId",
+						"type": "uint256"
+					}
+				],
+				"name": "getCombatComparsion",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "h1",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "h2",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -572,27 +645,27 @@
 			]
 		},
 		"Items.sol": {
-			"keccak256": "0xb52d482399e9dd981cd445538549d10f66f9b55b992ec23b45b28a739e72b828",
+			"keccak256": "0x403748edb266079d5cac67e45469e605c990943347f68a347264bf2e850acc3a",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://9a32e72d3291d01f29e61e1ee1ef0e67d36017c5f17098bed54751c7dfe3e9b2",
-				"dweb:/ipfs/QmVXGFSYnB9QtvLB8ao2e3yz2SSYUJG1JYpaJznNFTWRoj"
+				"bzz-raw://c985dffe78cc6204c552a8cba0dd331fbd27d80f1d48103a70c75ffc400ea82b",
+				"dweb:/ipfs/QmSCZnmFyqtPp1EwFSDmN3vdoUBj4VUL7Qm8jHJUnLKkty"
 			]
 		},
 		"Players.sol": {
-			"keccak256": "0x6d80b65367b56ab8f426a2afe5a5c2bb1c6a28c4de4361d96738480fdfdf582a",
+			"keccak256": "0xee8df7bed3bb934d8f3b77e92b1d7689ff36fd645350abed678e1789c7b58a8a",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://aa3128ce683b20f7a7b03cfe7d0d58114a485a9c0dc8f63a36dfbe6ec908ff16",
-				"dweb:/ipfs/QmZfnnEufKudhC4MQELD64pxozMEpdfPmZ75RHgD7VUorq"
+				"bzz-raw://2bb479153811235ef0dc7224c34671a7508031f12be456d6b3671d17c44a5c5f",
+				"dweb:/ipfs/QmX23sWvKLtEZ3jNEVtaHFvuzj4LShKF6NYybvazLCky4E"
 			]
 		},
 		"Quest.sol": {
-			"keccak256": "0x30add7c439b969cb31cc0904778c623359f50a20788bba87ee975ebb05203b7f",
+			"keccak256": "0x15169a6d8d0fb0eb488a79714cb897d84e191eb79c7c775ef6f6a8a5af52f8a1",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://0a452473bd76c6dd52d274a56af2b29525aeac72ac2769070db6d21e06221f50",
-				"dweb:/ipfs/QmVDmqGrynCgxY4R12UzciyfFwQ19hcFa3EkTfoVDGEARZ"
+				"bzz-raw://5e3c15e99753d2a2c8162fbd12029cee9195317bcd8a7c5a85d77f2ce7e82286",
+				"dweb:/ipfs/QmbzJFNxmwn26n3JjuRSgCMZfJ8tbR1PUUMX5wPGz4Qpcq"
 			]
 		}
 	},

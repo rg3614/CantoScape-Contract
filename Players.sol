@@ -25,7 +25,6 @@ contract Players is ERC721, ERC721Burnable, Ownable, ERC721Holder {
     
     address questContract;
 
-    // Remove Melee switch to Attack/Str/Def/HP = Combat Level
     struct Player {
         uint8 fishingLevel;
         uint8 cookingLevel;
