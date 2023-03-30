@@ -11,6 +11,11 @@
 						"internalType": "contract Players",
 						"name": "_nftCollection",
 						"type": "address"
+					},
+					{
+						"internalType": "contract CantoScapeItems",
+						"name": "_items",
+						"type": "address"
 					}
 				],
 				"stateMutability": "nonpayable",
@@ -221,6 +226,19 @@
 					}
 				],
 				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "items",
+				"outputs": [
+					{
+						"internalType": "contract CantoScapeItems",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -653,19 +671,19 @@
 			]
 		},
 		"Players.sol": {
-			"keccak256": "0xee8df7bed3bb934d8f3b77e92b1d7689ff36fd645350abed678e1789c7b58a8a",
+			"keccak256": "0xd8a505827170b8212d1fd26df34dbd393f4f01b2f8e8c1826010c04f680a165c",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://2bb479153811235ef0dc7224c34671a7508031f12be456d6b3671d17c44a5c5f",
-				"dweb:/ipfs/QmX23sWvKLtEZ3jNEVtaHFvuzj4LShKF6NYybvazLCky4E"
+				"bzz-raw://dedb145852179979fe8d3f85935893e6fea8be506f3e70d4120e125e1d3558b6",
+				"dweb:/ipfs/QmNmegqiYpWwD3ZaeXpAPbtNFuEvxLneMw3fLhAuVff4KR"
 			]
 		},
 		"Quest.sol": {
-			"keccak256": "0x15169a6d8d0fb0eb488a79714cb897d84e191eb79c7c775ef6f6a8a5af52f8a1",
+			"keccak256": "0x7d28b77a36c64038b6061daa0cbf84a51e14779ec2b32a0bf946cbf06e393ef1",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://5e3c15e99753d2a2c8162fbd12029cee9195317bcd8a7c5a85d77f2ce7e82286",
-				"dweb:/ipfs/QmbzJFNxmwn26n3JjuRSgCMZfJ8tbR1PUUMX5wPGz4Qpcq"
+				"bzz-raw://4a372dcd0f7cb7967f5da90f1b3bdba7b144e6c77b9e57a119e3605c0cafc71b",
+				"dweb:/ipfs/QmXGpsDqUsSMz9weeZB8bNWbzPYogEwxxbx2AZ51mKveuj"
 			]
 		}
 	},

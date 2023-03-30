@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.18+commit.87f61d96"
+		"version": "0.8.19+commit.7dd6d404"
 	},
 	"language": "Solidity",
 	"output": {
@@ -161,39 +161,6 @@
 				"type": "function"
 			},
 			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "_playerId",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "_itemId",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "_amount",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "xp",
-						"type": "uint256"
-					},
-					{
-						"internalType": "address",
-						"name": "_sender",
-						"type": "address"
-					}
-				],
-				"name": "craft",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
 				"inputs": [],
 				"name": "createPlayer",
 				"outputs": [],
@@ -208,9 +175,9 @@
 						"type": "uint256"
 					},
 					{
-						"internalType": "uint256[]",
+						"internalType": "uint256[11]",
 						"name": "_items",
-						"type": "uint256[]"
+						"type": "uint256[11]"
 					}
 				],
 				"name": "equipItems",
@@ -248,9 +215,43 @@
 				"name": "getCombatBonus",
 				"outputs": [
 					{
-						"internalType": "uint256[2]",
-						"name": "bonuses",
-						"type": "uint256[2]"
+						"internalType": "uint256",
+						"name": "attackBonus",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "defStrengthBonus",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_playerId",
+						"type": "uint256"
+					}
+				],
+				"name": "getCombatStats",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
 					}
 				],
 				"stateMutability": "view",
@@ -463,11 +464,6 @@
 						"type": "uint256"
 					},
 					{
-						"internalType": "address",
-						"name": "_playerAddress",
-						"type": "address"
-					},
-					{
 						"internalType": "uint256",
 						"name": "_questType",
 						"type": "uint256"
@@ -475,16 +471,6 @@
 					{
 						"internalType": "uint256",
 						"name": "_xp",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "_itemId",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "_amount",
 						"type": "uint256"
 					}
 				],
@@ -944,19 +930,19 @@
 			]
 		},
 		"Items.sol": {
-			"keccak256": "0xb52d482399e9dd981cd445538549d10f66f9b55b992ec23b45b28a739e72b828",
+			"keccak256": "0x403748edb266079d5cac67e45469e605c990943347f68a347264bf2e850acc3a",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://9a32e72d3291d01f29e61e1ee1ef0e67d36017c5f17098bed54751c7dfe3e9b2",
-				"dweb:/ipfs/QmVXGFSYnB9QtvLB8ao2e3yz2SSYUJG1JYpaJznNFTWRoj"
+				"bzz-raw://c985dffe78cc6204c552a8cba0dd331fbd27d80f1d48103a70c75ffc400ea82b",
+				"dweb:/ipfs/QmSCZnmFyqtPp1EwFSDmN3vdoUBj4VUL7Qm8jHJUnLKkty"
 			]
 		},
 		"Players.sol": {
-			"keccak256": "0xe1079956296727da6b5a8f178d548f446381c063aab72d44ae6cc1414a717065",
+			"keccak256": "0xd8a505827170b8212d1fd26df34dbd393f4f01b2f8e8c1826010c04f680a165c",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://09d3e2c9ae23ced8a8f9d0a461208c0a9f31596b4c96126e39a82085e2795ee4",
-				"dweb:/ipfs/QmZy3SiY1EbnSL2QnfUu553vrHVMw9PBFnteuGH6cuoJ7b"
+				"bzz-raw://dedb145852179979fe8d3f85935893e6fea8be506f3e70d4120e125e1d3558b6",
+				"dweb:/ipfs/QmNmegqiYpWwD3ZaeXpAPbtNFuEvxLneMw3fLhAuVff4KR"
 			]
 		}
 	},

@@ -7,6 +7,7 @@ import "./CantoScapeLib.sol";
 
 contract Quest is Ownable, ReentrancyGuard {
     Players public immutable nftCollection;
+    CantoScapeItems public immutable items;
 
     struct PlayerQuesting {
         uint256 id;
@@ -42,8 +43,9 @@ contract Quest is Ownable, ReentrancyGuard {
     mapping(uint256 => QuestDetail) public miningQuests;
     mapping(uint256 => QuestDetail) public smithingQuests;
 
-    constructor(Players _nftCollection) {
+    constructor(Players _nftCollection, CantoScapeItems _items) {
         nftCollection = _nftCollection;
+        items = _items;
 
         miningQuests[BRONZE] = QuestDetail("BRONZE ORE", 1, 5, BRONZE_ORE);
         miningQuests[IRON] = QuestDetail("IRON ORE", 10, 20, IRON_ORE);
@@ -91,11 +93,6 @@ contract Quest is Ownable, ReentrancyGuard {
         playerQuest.questDetail = _questDetail;
 
         nftCollection.transferFrom(msg.sender, address(this), _tokenId);
-    }
-
-    function craft(uint256 _playerId, uint256 _itemId, uint256 _amount) external {
-        uint256 xp = _amount * smithingQuests[_itemId].xp;
-        nftCollection.craft(_playerId, _itemId, _amount, xp, msg.sender);
     }
 
     function checkLevel(uint256 _tokenId, uint256 _questType, uint256 _questDetail) internal view {
@@ -163,12 +160,31 @@ contract Quest is Ownable, ReentrancyGuard {
 
                 (xpEarned, itemAmount) = getRewards(_tokenIds[i]);
 
-                nftCollection.rewards(_tokenIds[i], playerQuest.owner, playerQuest.questType, xpEarned*questDetail.xp , itemId, itemAmount);
+                items.mint(msg.sender, itemId, itemAmount, "");
+
+                nftCollection.rewards(_tokenIds[i], playerQuest.questType, xpEarned*questDetail.xp);
             }
             playerQuest.isQuesting = false;
 
             nftCollection.transferFrom(address(this), msg.sender, _tokenIds[i]);
         }
+    }
+
+    function craft(uint256 _playerId, uint256 _itemId, uint256 _amount) public onlyOwner {
+        uint256 xp = _amount * smithingQuests[_itemId].xp;
+        // XP added after second require
+
+        uint256 itemReq;
+        uint256 amount;
+
+        (, itemReq, amount) = items.CraftingRecipes(_itemId);
+        
+        require(items.balanceOf(msg.sender, itemReq) > amount * _amount, "Missing Required materials");
+
+        nftCollection.rewards(_playerId, SMITHING, xp);
+
+        items.burn(msg.sender, itemReq, amount * _amount);
+        items.mint(msg.sender, _itemId, _amount, "");
     }
 
     uint256 xpDenom = 150;

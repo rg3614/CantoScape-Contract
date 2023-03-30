@@ -147,14 +147,13 @@ contract Players is ERC721, ERC721Burnable, Ownable, ERC721Holder {
         }
     }
 
-    function rewards(uint256 _playerId, address _playerAddress, uint256 _questType, uint256 _xp, uint256 _itemId, uint256 _amount) public {
+    function rewards(uint256 _playerId, uint256 _questType, uint256 _xp) public {
         require (msg.sender == questContract, "403");
 
         Player storage player = players[_playerId];
 
         if (_questType == FISHING) {
             player.currentFishingXp += _xp;
-            items.mint(_playerAddress, _itemId, _amount, "");
             if (player.currentFishingXp >= xpForLevel[player.fishingLevel]) {
                 bool keepLvling = true;
                 while(keepLvling) {
@@ -169,7 +168,6 @@ contract Players is ERC721, ERC721Burnable, Ownable, ERC721Holder {
             }
         } else if (_questType == MINING) {
             player.currentMiningXp += _xp;
-            items.mint(_playerAddress, _itemId, _amount, "");
             if (player.currentMiningXp >= xpForLevel[player.miningLevel]) {
                 bool keepLvling = true;
                 while(keepLvling) {
@@ -182,34 +180,23 @@ contract Players is ERC721, ERC721Burnable, Ownable, ERC721Holder {
                     }
                 }
             }
-        }
-    }
-
-    function craft(uint256 _playerId, uint256 _itemId, uint256 _amount, uint256 xp, address _sender) public {
-        require (msg.sender == questContract, "403");
-        // XP added after second require
-        Player storage player = players[_playerId];
-        player.currentSmithingXp += xp;
-        if (player.currentSmithingXp >= xpForLevel[player.smithingLevel]) {
-            bool keepLvling = true;
-            while(keepLvling) {
-                if (player.smithingLevel > 98) {
-                    keepLvling = false;
-                } else if (player.currentSmithingXp >= xpForLevel[player.smithingLevel]) {
-                    levelUp(_playerId, SMITHING);
-                } else {
-                    keepLvling = false;
+        } else if (_questType == SMITHING) {    
+            player.currentSmithingXp += _xp;
+            if (player.currentSmithingXp >= xpForLevel[player.smithingLevel]) {
+                bool keepLvling = true;
+                while(keepLvling) {
+                    if (player.smithingLevel > 98) {
+                        keepLvling = false;
+                    } else if (player.currentSmithingXp >= xpForLevel[player.smithingLevel]) {
+                        levelUp(_playerId, SMITHING);
+                    } else {
+                        keepLvling = false;
+                    }
                 }
             }
-        }
-        uint256 itemReq;
-        uint256 amount;
-
-        (, itemReq, amount) = items.CraftingRecipes(_itemId);
-        require(items.balanceOf(_sender, itemReq) > amount * _amount, "Missing Required materials");
-        items.burn(_sender, itemReq, amount * _amount);
-        items.mint(_sender, _itemId, _amount, "");
+        } 
     }
+
 
     function _baseURI() internal pure override returns (string memory) {
         return "https://gateway.pinata.cloud/ipfs/QmQnfPjmxYsv8fkEWmav7GmyRaPmnrs9AeW2Jw5KL2oW1o/";
