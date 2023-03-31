@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.18+commit.87f61d96"
+		"version": "0.8.19+commit.7dd6d404"
 	},
 	"language": "Solidity",
 	"output": {
@@ -774,11 +774,11 @@
 			]
 		},
 		"Items.sol": {
-			"keccak256": "0x403748edb266079d5cac67e45469e605c990943347f68a347264bf2e850acc3a",
+			"keccak256": "0xb1360e75c8b085f5b1cd9c0ba5150dcdedd3d5c97435678f6d479266e162fe54",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://c985dffe78cc6204c552a8cba0dd331fbd27d80f1d48103a70c75ffc400ea82b",
-				"dweb:/ipfs/QmSCZnmFyqtPp1EwFSDmN3vdoUBj4VUL7Qm8jHJUnLKkty"
+				"bzz-raw://58a06de03d94be38a5c60b8731e7c567e3a0cb7ac01be3ae9c7d6402329794ec",
+				"dweb:/ipfs/QmP7aGkDSXDHXojn9urLztu7FmHfDNuLaM2wa5CHnvR925"
 			]
 		}
 	},

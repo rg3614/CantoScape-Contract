@@ -938,11 +938,11 @@
 			]
 		},
 		"Players.sol": {
-			"keccak256": "0xd8a505827170b8212d1fd26df34dbd393f4f01b2f8e8c1826010c04f680a165c",
+			"keccak256": "0xba4d51408412ea99f1d59b1ca2f71b56d95f52060ebb413f90ed445bc28613d4",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://dedb145852179979fe8d3f85935893e6fea8be506f3e70d4120e125e1d3558b6",
-				"dweb:/ipfs/QmNmegqiYpWwD3ZaeXpAPbtNFuEvxLneMw3fLhAuVff4KR"
+				"bzz-raw://3b5a6757b02d7b11ac6fed04a30f3c508a5833db3f2e51ec8463720c9795346d",
+				"dweb:/ipfs/QmVgYxsHUxpqm7x7YyAHWVaFvUAQNToRsML62ciR9GG7Zn"
 			]
 		}
 	},

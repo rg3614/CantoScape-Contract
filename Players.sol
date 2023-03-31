@@ -149,9 +149,7 @@ contract Players is ERC721, ERC721Burnable, Ownable, ERC721Holder {
 
     function rewards(uint256 _playerId, uint256 _questType, uint256 _xp) public {
         require (msg.sender == questContract, "403");
-
         Player storage player = players[_playerId];
-
         if (_questType == FISHING) {
             player.currentFishingXp += _xp;
             if (player.currentFishingXp >= xpForLevel[player.fishingLevel]) {

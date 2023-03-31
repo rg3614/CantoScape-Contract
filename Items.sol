@@ -29,7 +29,7 @@ contract CantoScapeItems is ERC1155, Ownable, ERC1155Burnable, ERC1155Supply {
     mapping(uint256 => equipmentBonuses) public EquipmentBonuses;
 
     constructor() ERC1155("ENTER URL HERE") {
-        EquipmentBonuses[0] = equipmentBonuses(0,0,0,0,0);
+        EquipmentBonuses[1000] = equipmentBonuses(0,0,0,0,0);
         EquipmentBonuses[BRONZE_FULL_HELM] = equipmentBonuses(0,0,4,5,3);
         EquipmentBonuses[BRONZE_PLATEBODY] = equipmentBonuses(0,0,15,14,9);
         EquipmentBonuses[BRONZE_PLATELEGS] = equipmentBonuses(0,0,8,7,6);

@@ -115,13 +115,13 @@ contract Quest is Ownable, ReentrancyGuard {
         }
     }
 
-    function calculateMaxHit(uint effectiveStrengthLevel, uint bonus, uint defenseLevel, uint defenseBonus) public pure returns (uint) {
-        uint denominator = defenseLevel * defenseBonus;
-        uint maxHit = (effectiveStrengthLevel * bonus) / denominator;
+    function calculateMaxHit(uint256 effectiveStrengthLevel, uint256 bonus, uint256 defenseLevel, uint256 defenseBonus) public view returns (uint256) {
+        uint256 denominator = defenseLevel * (defenseBonus+1);
+        uint256 maxHit = (effectiveStrengthLevel * (bonus+1)) / denominator;
         return maxHit;
     }
 
-    function getCombatComparsion(uint256 _monsterId, uint256 _playerId) public returns(uint256 h1, uint256 h2) {
+    function getCombatComparsion(uint256 _monsterId, uint256 _playerId) public view returns(uint256 h1, uint256 h2) {
         Monster storage m = combatQuests[_monsterId];
         uint256 attackBonus;
         uint256 defenseBonus;
@@ -135,6 +135,8 @@ contract Quest is Ownable, ReentrancyGuard {
 
         h1 = calculateMaxHit(strengthLevel, attackBonus, m.defenseLevel, 0);
         h2 = calculateMaxHit(m.strengthLevel, 0, defenseLevel, defenseBonus);
+
+        return (h1,h2);
     }
 
     function withdraw(uint256[] calldata _tokenIds) external nonReentrant {
