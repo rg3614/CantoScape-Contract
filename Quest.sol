@@ -64,6 +64,8 @@ contract Quest is Ownable, ReentrancyGuard {
         uint8[] memory t = new uint8[](1);
 //        t[0] = 0;
         combatQuests[CHICKEN] = Monster("CHICKEN", 1, 1, 1, 10, 5, t);
+        combatQuests[GREATER_DEMON] = Monster("GREATER_DEMON", 70, 70, 70, 200, 100, t);
+
         // combatQuests[GOBLIN] = QuestDetail("GOBLIN", 5, 25, 0);
         // combatQuests[WARRIOR] = QuestDetail("WARRIOR", 10, 50, 0);
         // combatQuests[BARBARIAN] = QuestDetail("BARBARIAN", 20, 75, 0);
@@ -79,7 +81,7 @@ contract Quest is Ownable, ReentrancyGuard {
         rewardsMultipler = _rewardsMultipler;
     }
 
-    function quest(uint256 _tokenId, uint256 _questType, uint256 _questDetail) external  {
+    function skill(uint256 _tokenId, uint256 _questType, uint256 _questDetail) external  {
         require(nftCollection.ownerOf(_tokenId) == msg.sender, "Can't stake tokens you don't own!");
 
         checkLevel(_tokenId, _questType, _questDetail);
@@ -93,6 +95,25 @@ contract Quest is Ownable, ReentrancyGuard {
         playerQuest.questDetail = _questDetail;
 
         nftCollection.transferFrom(msg.sender, address(this), _tokenId);
+    }
+
+    function combat(uint256 _playerId, uint256 _questDetail, uint256 _amount, uint256 _food, uint256 _skill) public {
+        uint256 p;
+        uint256 m;
+
+        // Get actual food bonus
+        uint256 foodBonus = 1;
+
+        (p,m) = getCombatComparsion(_questDetail, _playerId);
+        uint256 targetAmount = (p * foodBonus / m) / _amount;
+
+        // require player has more food than targetAmount
+
+        // Take food
+
+        // Give xp
+
+        // Give drops
     }
 
     function checkLevel(uint256 _tokenId, uint256 _questType, uint256 _questDetail) internal view {
